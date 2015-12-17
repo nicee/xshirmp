@@ -58,30 +58,28 @@ public class ExceptionDefinition {
 
     private Properties getDefinitions() throws IOException {
         if (exceptionProperties.isEmpty()) {
-            internalLoadErrorResoruce();
+            internalLoad();
         }
         return exceptionProperties;
     }
 
-    private void internalLoadErrorResoruce() throws IOException {
+    private void internalLoad() throws IOException {
         if (!CollectionUtils.isEmpty(resourcePattern)) {
             for (String path : resourcePattern) {
-                Resource[] resources = resourcePatternResolver.getResources(path);
-                internalLoadErrorResoruce(resources);
+                internalLoadResoruce(resourcePatternResolver.getResources(path));
             }
         }
     }
 
-    private void internalLoadErrorResoruce(Resource[] resources) throws IOException {
+    private void internalLoadResoruce(Resource[] resources) throws IOException {
         if (ArrayUtils.isNotEmpty(resources)) {
             for (Resource resource : resources) {
-                InputStream inputStream = resource.getInputStream();
-                internalLoadErrorResoruce(inputStream);
+                internalLoadErrorMessage(resource.getInputStream());
             }
         }
     }
 
-    private void internalLoadErrorResoruce(InputStream inputStream) throws IOException {
+    private void internalLoadErrorMessage(InputStream inputStream) throws IOException {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             exceptionProperties.load(inputStreamReader);
