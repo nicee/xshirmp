@@ -26,6 +26,7 @@
         <module>lotus-core</module>
         <module>lotus-datasource</module>
         <module>lotus-test</module>
+        <module>lotus-aspectJ</module>
     </modules>
 
     <!-- 定义一些全局属性 -->

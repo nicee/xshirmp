@@ -20,7 +20,7 @@ public class ExceptionFactory {
 
     public static Exception create(String errorCode, String... args) {
         String errorMessage = getExceptionDefinition().getExceptionMessage(errorCode);
-        if(args.length > 0) {
+        if (args.length > 0) {
             errorMessage = String.format(errorMessage, args);
         }
         return new UnknownException(errorCode, errorMessage);
