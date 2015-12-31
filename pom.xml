@@ -27,6 +27,8 @@
         <module>lotus-datasource</module>
         <module>lotus-test</module>
         <module>lotus-aspectJ</module>
+        <module>lotus-mvc</module>
+        <module>lotus-wechat</module>
     </modules>
 
     <!-- 定义一些全局属性 -->
@@ -81,7 +83,6 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.8.3</version>
         </dependency>
-
 
         <!-- slf4j  -->
         <dependency>

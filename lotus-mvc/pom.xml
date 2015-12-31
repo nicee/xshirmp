@@ -11,19 +11,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>lotus-core</artifactId>
+    <artifactId>lotus-mvc</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <dependencies>
 
-        <!-- apache -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-
-    </dependencies>
 
 </project>
