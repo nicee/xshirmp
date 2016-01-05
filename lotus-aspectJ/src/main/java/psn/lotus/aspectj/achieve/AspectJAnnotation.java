@@ -26,7 +26,7 @@ public class AspectJAnnotation<A extends Annotation> {
 
     }
 
-    protected enum AspectJAnnotationType {
+    private enum AspectJAnnotationType {
         ADVICE_J_ANNOTATION_TYPE,
         AFTER_J_ANNOTATION_TYPE,
         AFTER_RETURNING_J_ANNOTATION_TYPE,

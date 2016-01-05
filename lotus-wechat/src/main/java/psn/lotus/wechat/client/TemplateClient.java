@@ -34,7 +34,7 @@ public final class TemplateClient extends WechatClient implements TemplateAPI {
     }
 
     public void sendMessage(Map<String, Object> requestParam) {
-        Args.notNull(requestParam, "template content is null.");
+        Args.notNull(requestParam, "template request params is null.");
         String targetUrl = replaceAccessToken(SEND_TEMPLATE_URL);
         JSONObject jsonObject = getHttpRequest().doPost(targetUrl, requestParam, ResponseHttpHandler.DEFAULTE_RESPONSE_HANDLER);
         System.out.print(jsonObject);

@@ -72,12 +72,12 @@ public abstract class WechatClient implements WechatError {
     }
 
     private void askAccessToken() {
-//        String accessTokenUrl = GET_ACCESS_TOKEN_URL.replace("APPID", wAccount.getAppId()).replace("APPSECRET", wAccount.getAppSecret());
-//        JSONObject content = httpRequest.doGet(accessTokenUrl, ResponseHttpHandler.DEFAULTE_RESPONSE_HANDLER);
-//        accessToken.setExpiresIn((Long) content.get("expires_in"));
-        accessToken.setExpiresIn(new Integer(7200));
-        accessToken.setAccessToken("-P15wAOYW3NAW6rzvBdu6J0I0Ew8BQMgenWiCMDuwSYtKZqZO2hqJ0pyBfqe7HyumBHu-HMsRS1qpEfdELnzZ8DA93ij2xKljHqR_gFLGq8OWTdAAASAX");
-//        accessToken.setAccessToken((String) content.get("access_token"));
+        String accessTokenUrl = GET_ACCESS_TOKEN_URL.replace("APPID", wAccount.getAppId()).replace("APPSECRET", wAccount.getAppSecret());
+        JSONObject content = httpRequest.doGet(accessTokenUrl, ResponseHttpHandler.DEFAULTE_RESPONSE_HANDLER);
+        accessToken.setExpiresIn((Long) content.get("expires_in"));
+        //accessToken.setExpiresIn(new Integer(7200));
+        //accessToken.setAccessToken("-P15wAOYW3NAW6rzvBdu6J0I0Ew8BQMgenWiCMDuwSYtKZqZO2hqJ0pyBfqe7HyumBHu-HMsRS1qpEfdELnzZ8DA93ij2xKljHqR_gFLGq8OWTdAAASAX");
+        accessToken.setAccessToken((String) content.get("access_token"));
         loaded = true;
     }
 

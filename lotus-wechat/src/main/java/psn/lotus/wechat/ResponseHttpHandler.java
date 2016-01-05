@@ -39,7 +39,7 @@ public final class ResponseHttpHandler implements ResponseHandler<JSONObject> {
         InputStream instream = entity.getContent();
         BufferedReader reader = new BufferedReader(new InputStreamReader(instream, getCharset(entity)));
         StringBuffer buffer = new StringBuffer();
-        String readerLine = null;
+        String readerLine;
         while ((readerLine = reader.readLine()) != null) {
             buffer.append(readerLine);
         }

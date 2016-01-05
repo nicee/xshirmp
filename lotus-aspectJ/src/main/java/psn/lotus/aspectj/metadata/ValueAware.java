@@ -1,4 +1,4 @@
-package psn.lotus.aspectj;
+package psn.lotus.aspectj.metadata;
 
 /**
  * @author: nicee
