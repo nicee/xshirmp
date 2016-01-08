@@ -3,6 +3,7 @@ package psn.lotus.wechat;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
@@ -23,12 +24,13 @@ public final class ResponseHttpHandler implements ResponseHandler<JSONObject> {
 
     public static final ResponseHandler DEFAULTE_RESPONSE_HANDLER = new ResponseHttpHandler();
 
-    public JSONObject handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+    public JSONObject handleResponse(HttpResponse httpResponse) throws IOException {
+        StatusLine statusLine = httpResponse.getStatusLine();
+        int statusCode = statusLine.getStatusCode();
         HttpEntity entity = httpResponse.getEntity();
         if (statusCode > 300) {
             EntityUtils.consume(entity);
-            throw new HttpResponseException(statusCode, httpResponse.getStatusLine().getReasonPhrase());
+            throw new HttpResponseException(statusCode, statusLine.getReasonPhrase());
         }
         return entity == null ? null : resovleContent(entity);
     }

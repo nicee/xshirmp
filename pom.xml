@@ -29,6 +29,7 @@
         <module>lotus-aspectJ</module>
         <module>lotus-mvc</module>
         <module>lotus-wechat</module>
+        <module>lotus-server</module>
     </modules>
 
     <!-- 定义一些全局属性 -->
