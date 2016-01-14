@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 抽象处理器
+ *
  * @author: nicee
  * @since: 2016/1/14
  */
 public abstract class AbstractHandler extends AbstractLifeCycle implements Handler {
 
+    /**
+     * 实际的处理器
+     */
     private Handler handler;
 
     public AbstractHandler(Handler handler) {
@@ -22,20 +27,20 @@ public abstract class AbstractHandler extends AbstractLifeCycle implements Handl
         this.handler = handler;
     }
 
-    public void handler(HttpServletRequest request, HttpServletResponse response, Callback callback) throws Exception {
+    public Object handler(HttpServletRequest request, HttpServletResponse response, Callback callback) throws Exception {
         Assert.notNull("handler could not be null.");
         if (callback == null) {
             callback = DefaultCallback.getInstance();
         }
-        handler.handler(request, response, callback);
+        return handler.handler(request, response, callback);
     }
 
     public void start() throws Exception {
-
+        super.start();
     }
 
     public void stop() throws Exception {
-
+        super.stop();
     }
 
     private static final class DefaultCallback implements Callback {

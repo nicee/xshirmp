@@ -25,6 +25,20 @@ public interface HandlerContainer {
      *
      * @param handlers 处理器
      */
-    void setHandler(Handler[] handlers);
+    void setHandlers(Handler[] handlers);
+
+    /**
+     * 添加处理器
+     *
+     * @param handler 处理器
+     */
+    void addHandler(Handler handler);
+
+    /**
+     * 移除处理器
+     *
+     * @param handler 处理器
+     */
+    void removeHandler(Handler handler);
 
 }

@@ -27,13 +27,21 @@ public class RealityHandlerContainer implements HandlerContainer {
         return handlers.toArray(arrHandler);
     }
 
-    public void setHandler(Handler[] handlers) {
+    public void setHandlers(Handler[] handlers) {
         Assert.notNull(handlers, "handlers could not be null.");
-        Assert.notEmpty(handlers, "handlers could not be null.");
-
-        for(Handler handler : handlers) {
+        for (Handler handler : handlers) {
             this.handlers.add(handler);
         }
+    }
+
+    public void addHandler(Handler handler) {
+        Assert.notNull(handler, "handlers could not be null.");
+        handlers.add(handler);
+    }
+
+    public void removeHandler(Handler handler) {
+        Assert.notNull(handler, "handlers could not be null.");
+        handlers.remove(handler);
     }
 
 }

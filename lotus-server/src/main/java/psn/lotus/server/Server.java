@@ -1,10 +1,9 @@
 package psn.lotus.server;
 
 import psn.lotus.server.api.Handler;
-import psn.lotus.server.api.HandlerContainer;
 import psn.lotus.server.api.LifeCycle;
 import psn.lotus.server.api.ServerBuilder;
-import psn.lotus.server.handler.AbstractHandlerContainer;
+import psn.lotus.server.handler.HandlerContainerWrapper;
 
 /**
  * 服务器
@@ -12,12 +11,12 @@ import psn.lotus.server.handler.AbstractHandlerContainer;
  * @author: nicee
  * @since: 2016/1/14
  */
-public class Server extends AbstractHandlerContainer implements LifeCycle {
+public class Server extends HandlerContainerWrapper implements LifeCycle {
 
-    private HandlerContainer handlerContainer;
+    private psn.lotus.server.api.HandlerContainer handlerContainer;
     private ServerBuilder builder;
 
-    public Server(ServerBuilder builder, HandlerContainer handlerContainer) {
+    public Server(ServerBuilder builder, psn.lotus.server.api.HandlerContainer handlerContainer) {
         super(handlerContainer);
         this.handlerContainer = handlerContainer;
         this.builder = builder;

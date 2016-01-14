@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author: nicee
  * @since: 2016/1/14
  */
-public interface Handler extends LifeCycle {
+public interface Handler extends LifeCycle, Destroyable {
 
     /**
      * 处理器主体
@@ -19,6 +19,6 @@ public interface Handler extends LifeCycle {
      * @param callback 回调处理
      * @throws Exception
      */
-    void handler(HttpServletRequest request, HttpServletResponse response, Callback callback) throws Exception;
+    <T> T handler(HttpServletRequest request, HttpServletResponse response, Callback<T> callback) throws Exception;
 
 }
