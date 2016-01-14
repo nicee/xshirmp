@@ -1,6 +1,5 @@
 package psn.lotus.wechat;
 
-import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import psn.lotus.wechat.client.TemplateClient;
 import psn.lotus.wechat.param.template.TemplateSubData;

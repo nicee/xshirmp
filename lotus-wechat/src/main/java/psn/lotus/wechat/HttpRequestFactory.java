@@ -113,15 +113,17 @@ public class HttpRequestFactory implements HttpRequest {
         return wechat;
     }
 
-    private synchronized CloseableHttpClient getHttpsClient() {
-        if (!init) {
-            SSLContext sslContext = createSSLContext();
-            BUILDER.setSslcontext(sslContext);
-            BUILDER.setMaxConnTotal(10);
-            BUILDER.setMaxConnPerRoute(20);
-            init = true;
+    private CloseableHttpClient getHttpsClient() {
+        synchronized (BUILDER) {
+            if (!init) {
+                SSLContext sslContext = createSSLContext();
+                BUILDER.setSslcontext(sslContext);
+                BUILDER.setMaxConnTotal(10);
+                BUILDER.setMaxConnPerRoute(20);
+                init = true;
+            }
+            return BUILDER.build();
         }
-        return BUILDER.build();
     }
 
     private SSLContext createSSLContext() {
