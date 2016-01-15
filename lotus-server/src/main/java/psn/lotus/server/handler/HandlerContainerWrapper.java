@@ -1,25 +1,26 @@
 package psn.lotus.server.handler;
 
+import org.springframework.util.Assert;
 import psn.lotus.server.api.Handler;
+import psn.lotus.server.api.HandlerContainer;
 
 /**
+ * 处理器容器
+ *
  * @author: nicee
  * @since: 2016/1/14
  */
-public class HandlerContainerWrapper implements psn.lotus.server.api.HandlerContainer {
+public class HandlerContainerWrapper implements HandlerContainer {
 
-    private psn.lotus.server.api.HandlerContainer handlerContainer;
+    private HandlerContainer handlerContainer;
 
-    public HandlerContainerWrapper(psn.lotus.server.api.HandlerContainer handlerContainer) {
+    public HandlerContainerWrapper(HandlerContainer handlerContainer) {
+        Assert.notNull(handlerContainer, "Handler container could not be null.");
         this.handlerContainer = handlerContainer;
     }
 
-    public Handler getParent() {
-        return handlerContainer.getParent();
-    }
-
-    public Handler[] getChildren() {
-        return handlerContainer.getChildren();
+    public Handler[] getHandlers() {
+        return (null == handlerContainer) ? new Handler[0] : handlerContainer.getHandlers();
     }
 
     public void setHandlers(Handler[] handlers) {

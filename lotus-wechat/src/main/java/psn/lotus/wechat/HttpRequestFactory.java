@@ -16,6 +16,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.Args;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -32,22 +33,16 @@ import static psn.lotus.wechat.error.ErrorMessage.*;
  * @author: nicee
  * @since: 2015/12/30
  */
+@Component
 public class HttpRequestFactory implements HttpRequest {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpRequestFactory.class);
 
-    private static HttpRequest httpRequest = new HttpRequestFactory();
+    private static final HttpRequest httpRequest = new HttpRequestFactory();
 
     private static final HttpClientBuilder BUILDER = HttpClientBuilder.create();
 
-    private boolean init = false;
-
-    private HttpRequestFactory() {
-    }
-
-    public static HttpRequest getHttpRequest() {
-        return httpRequest;
-    }
+    private static boolean init = false;
 
     public JSONObject doGet(String uri, ResponseHandler handler) {
         return doGet(uri, (HttpContext) null, handler);
@@ -75,6 +70,7 @@ public class HttpRequestFactory implements HttpRequest {
 
     public JSONObject doPost(String uri, Map<String, Object> params, HttpContext context, ResponseHandler handler) {
         HttpPost post = new HttpPost(uri);
+        post.setHeader("Content-Type", "application/json; charset=utf-8");
         try {
             String requestStr = JSONObject.toJSONString(params);
             post.setEntity(new StringEntity(requestStr));

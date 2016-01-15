@@ -1,10 +1,13 @@
 package psn.lotus.server;
 
 import org.junit.Test;
+import psn.lotus.server.api.Connector;
+import psn.lotus.server.api.Handler;
 import psn.lotus.server.api.HandlerContainer;
-import psn.lotus.server.api.ServerBuilder;
+import psn.lotus.server.api.LifeCycleListener;
+import psn.lotus.server.handler.ConcurrentHandlerContainer;
 import psn.lotus.server.handler.HandlerWrapper;
-import psn.lotus.server.handler.RealityHandlerContainer;
+import psn.lotus.server.handler.SampleHandler;
 
 /**
  * @author: nicee
@@ -14,10 +17,13 @@ public class ServerTest {
 
     @Test
     public void test() throws Exception {
-        ServerBuilder builder = new ServerBuildImpl();
-        HandlerContainer handlerContainer = new RealityHandlerContainer();
-        handlerContainer.addHandler(new HandlerWrapper());
-        Server server = new Server(builder, handlerContainer);
+        HandlerContainer handlerContainer = new ConcurrentHandlerContainer();
+        Handler handler = new HandlerWrapper(new SampleHandler());
+        handlerContainer.addHandler(handler);
+        Server server = new Server(handlerContainer);
+
+        Connector connector = new SocketConnector();
+        server.setConnector(connector);
 
         server.start();
         server.stop();

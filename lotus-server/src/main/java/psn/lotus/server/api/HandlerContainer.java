@@ -7,18 +7,11 @@ package psn.lotus.server.api;
 public interface HandlerContainer {
 
     /**
-     * 获取当前父处理器
-     *
-     * @return 父处理器
-     */
-    Handler getParent();
-
-    /**
      * 获取子处理器列表
      *
      * @return 子处理器
      */
-    Handler[] getChildren();
+    Handler[] getHandlers();
 
     /**
      * 设置处理器

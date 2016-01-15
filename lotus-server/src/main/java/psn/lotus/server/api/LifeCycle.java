@@ -26,7 +26,7 @@ public interface LifeCycle {
     /**
      * 声明周期状态
      */
-    interface LifeStatus extends LifeCycle {
+    interface LifeStatus {
 
         /**
          * 是否正在启动

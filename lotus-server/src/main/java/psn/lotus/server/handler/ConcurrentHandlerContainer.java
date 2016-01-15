@@ -7,22 +7,20 @@ import psn.lotus.server.api.HandlerContainer;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
+ * 同步处理器容器
+ *
  * @author: nicee
  * @since: 2016/1/14
  */
-public class RealityHandlerContainer implements HandlerContainer {
+public class ConcurrentHandlerContainer implements HandlerContainer {
 
     private final ConcurrentLinkedDeque<Handler> handlers = new ConcurrentLinkedDeque<Handler>();
 
-    public RealityHandlerContainer() {
+    public ConcurrentHandlerContainer() {
 
     }
 
-    public Handler getParent() {
-        return null;
-    }
-
-    public Handler[] getChildren() {
+    public Handler[] getHandlers() {
         Handler[] arrHandler = new Handler[handlers.size()];
         return handlers.toArray(arrHandler);
     }

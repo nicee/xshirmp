@@ -1,9 +1,11 @@
 package psn.lotus.wechat;
 
-import org.junit.Test;
-import psn.lotus.wechat.client.TemplateClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
+import psn.lotus.wechat.api.TemplateAPI;
 import psn.lotus.wechat.param.template.TemplateSubData;
-import psn.lotus.wechat.url.TemplateAPI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,19 +14,20 @@ import java.util.Map;
  * @author: nicee
  * @since: 2015/12/30
  */
+@ContextConfiguration(locations = {"classpath:/spring/spring-context.xml"})
+public class TemplateTest extends AbstractTestNGSpringContextTests {
 
-public class TemplateTest {
+    @Autowired
+    private TemplateAPI templateAPI;
 
     @Test
     public void testGet() {
-        TemplateAPI templateAPI = new TemplateClient();
         String shortId = "1";
         templateAPI.getTemplateId(shortId);
     }
 
     @Test
     public void testSend() {
-        TemplateAPI templateAPI = new TemplateClient();
         Map<String, Object> requestParam = new HashMap<String, Object>();
         requestParam.put("url", "http://www.baidu.com");
         requestParam.put("touser", "om5fqstmkv4UNGMDcPI4B7V_Zbf8");
