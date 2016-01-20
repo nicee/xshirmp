@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSON;
 import java.io.Serializable;
 
 /**
+ * 模板内容主体
+ *
  * @author: nicee
  * @since: 2015/12/29
  */

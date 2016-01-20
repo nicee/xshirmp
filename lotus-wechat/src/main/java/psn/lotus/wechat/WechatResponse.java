@@ -3,12 +3,14 @@ package psn.lotus.wechat;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
+ * 微信响应返回内容
+ *
  * @author: nicee
  * @since: 2015/12/29
  */
+@Deprecated
 public class WechatResponse implements Serializable {
 
     private static final long serialVersionUID = 4634312148483891204L;
@@ -20,8 +22,6 @@ public class WechatResponse implements Serializable {
     public WechatResponse() {
 
     }
-
-
 
     public int getStatusCode() {
         return statusCode;

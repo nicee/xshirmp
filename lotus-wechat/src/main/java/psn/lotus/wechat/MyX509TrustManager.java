@@ -5,6 +5,8 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 /**
+ * SSL请求中所带的证书
+ *
  * @author: nicee
  * @since: 2015/12/31
  */

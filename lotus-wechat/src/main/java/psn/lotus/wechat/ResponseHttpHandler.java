@@ -4,35 +4,47 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.ContentType;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.Args;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import psn.lotus.wechat.error.WechatError;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
 /**
+ * http请求回调处理
+ *
  * @author: nicee
  * @since: 2015/12/31
  */
+@Component
 public final class ResponseHttpHandler implements ResponseHandler<JSONObject> {
 
-    public static final ResponseHandler DEFAULTE_RESPONSE_HANDLER = new ResponseHttpHandler();
+    @Autowired
+    private WechatError<JSONObject> wechatErrorResolver;
 
-    public JSONObject handleResponse(HttpResponse httpResponse) throws IOException {
+    public JSONObject handleResponse(HttpResponse httpResponse) throws IOException, WechatException {
         StatusLine statusLine = httpResponse.getStatusLine();
         int statusCode = statusLine.getStatusCode();
         HttpEntity entity = httpResponse.getEntity();
-        if (statusCode > 300) {
+        //TODO != 200 or > 300 ??
+        if (statusCode != 200) {
             EntityUtils.consume(entity);
             throw new HttpResponseException(statusCode, statusLine.getReasonPhrase());
         }
-        return entity == null ? null : resovleContent(entity);
+
+        JSONObject content = (entity == null) ? null : resovleContent(entity);
+        if (content != null) {
+            wechatErrorResolver.resolveCode(content);
+        }
+        return content;
     }
 
     private JSONObject resovleContent(HttpEntity entity) throws IOException {
@@ -47,12 +59,6 @@ public final class ResponseHttpHandler implements ResponseHandler<JSONObject> {
         }
         JSONObject content = JSONObject.parseObject(buffer.toString());
         return content;
-    }
-
-    private long checkLength(HttpEntity entity) {
-        long length = entity.getContentLength();
-
-        return length;
     }
 
     private Charset getCharset(HttpEntity entity) throws UnsupportedEncodingException {

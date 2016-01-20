@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
+ * 模板POST数据封装
+ *
  * @author: nicee
  * @since: 2015/12/29
  */

@@ -5,12 +5,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 import psn.lotus.wechat.api.TemplateAPI;
+import psn.lotus.wechat.param.template.TemplateRequest;
 import psn.lotus.wechat.param.template.TemplateSubData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 模板消息测试类
+ *
  * @author: nicee
  * @since: 2015/12/30
  */
@@ -28,11 +31,11 @@ public class TemplateTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSend() {
-        Map<String, Object> requestParam = new HashMap<String, Object>();
-        requestParam.put("url", "http://www.baidu.com");
-        requestParam.put("touser", "om5fqstmkv4UNGMDcPI4B7V_Zbf8");
-        requestParam.put("template_id", "EQJ6Q51WQyPQbT9okqnfi5a1oKsGRmKIw78xbgF-CwE");
-        requestParam.put("topcolor", "#000000");
+        TemplateRequest requestParam = new TemplateRequest();
+        requestParam.setUrl("http://www.baidu.com");
+        requestParam.setTouser("om5fqstmkv4UNGMDcPI4B7V_Zbf8");
+        requestParam.setTemplate_id("EQJ6Q51WQyPQbT9okqnfi5a1oKsGRmKIw78xbgF-CwE");
+        requestParam.setTopcolor("#000000");
 
         Map<String, TemplateSubData> datas = new HashMap<String, TemplateSubData>();
 
@@ -71,7 +74,7 @@ public class TemplateTest extends AbstractTestNGSpringContextTests {
         remark.setValue("这是结尾");
         datas.put("remark", remark);
 
-        requestParam.put("data", datas);
+        requestParam.setData(datas);
         templateAPI.sendMessage(requestParam);
     }
 
