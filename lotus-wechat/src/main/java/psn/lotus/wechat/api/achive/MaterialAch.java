@@ -5,12 +5,10 @@ import org.apache.http.util.Args;
 import org.springframework.stereotype.Service;
 import psn.lotus.wechat.Urls;
 import psn.lotus.wechat.api.MaterialAPI;
-import psn.lotus.wechat.param.MediaType;
+import psn.lotus.wechat.param.MaterialType;
 import psn.lotus.wechat.param.meterial.NewsMaterialRequest;
 import psn.lotus.wechat.param.meterial.QueryMaterialsRequest;
 import psn.lotus.wechat.param.meterial.TempMaterialRequest;
-
-import java.io.File;
 
 /**
  * 素材管理实现
@@ -21,21 +19,10 @@ import java.io.File;
 @Service
 public final class MaterialAch extends AbstractBasedAch implements MaterialAPI {
 
-    public String uploadMaterial(File file, MediaType mediaType) {
-        Args.notNull(file, "Media file could not be null.");
-        Args.notNull(mediaType, "Media type could not be null.");
-        String targetUrl = "";
-        if (mediaType.equals(MediaType.IMAGE)) {
-            targetUrl = accessTokenAPI.replaceAccessToken(Urls.UPLOAD_MPNEW_IMG_URL);
-        }
-        JSONObject result = httpRequest.doPost(targetUrl, file, responseHandler);
-        return result.getString("url");
-    }
-
     public JSONObject addTempMaterial(TempMaterialRequest material) {
         Args.notNull(material, "Material could not be null.");
         String targetUrl = accessTokenAPI.replaceAccessToken(Urls.CREATE_TMP_MATERIAL_URL);
-        MediaType mediaType = material.getType();
+        MaterialType mediaType = material.getType();
         targetUrl.replace("TYPE", mediaType.name());
         return httpRequest.doPost(targetUrl, material.getFile(), responseHandler);
     }
@@ -52,7 +39,7 @@ public final class MaterialAch extends AbstractBasedAch implements MaterialAPI {
     }
 
     public String addNewsMaterial(NewsMaterialRequest[] newsMaterials) {
-        Args.notNull(newsMaterials, "material could not be null.");
+        Args.notNull(newsMaterials, "Mpnews material could not be null.");
         String targetUrl = accessTokenAPI.replaceAccessToken(Urls.CREATE_NEWS_MATERIAL_URL);
         StringBuffer buffer = new StringBuffer();
         buffer.append("{\"articles\":[");

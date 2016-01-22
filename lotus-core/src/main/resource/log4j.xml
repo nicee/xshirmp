@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- 控制台打印日志 -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Encoding" value="utf-8"/>
+        <!-- 设置日志最低级别，屏蔽低于info级别的日志 -->
+        <param name="Threshold" value="info"/>
+        <!-- 日志打印布局 -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}][%-5p]%F:%L - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 每日生成一个日志文件 -->
+    <appender name="file-info" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="D:\\info.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxBackupIndex" value="30"/>
+        <param name="Pattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}][%-5p]%F:%L - %m%n"/>
+        </layout>
+        <!-- 过滤级别 只打印trace <-> info之间 -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="trace"/>
+            <param name="LevelMax" value="info"/>
+        </filter>
+    </appender>
+
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file-info"/>
+    </root>
+
+</log4j:configuration>

@@ -1,7 +1,7 @@
 package psn.lotus.wechat.api;
 
 import com.alibaba.fastjson.JSONObject;
-import psn.lotus.wechat.param.MediaType;
+import psn.lotus.wechat.param.MaterialType;
 import psn.lotus.wechat.param.meterial.NewsMaterialRequest;
 import psn.lotus.wechat.param.meterial.QueryMaterialsRequest;
 import psn.lotus.wechat.param.meterial.TempMaterialRequest;
@@ -15,15 +15,6 @@ import java.io.File;
  * @since: 2016/1/20
  */
 public interface MaterialAPI {
-
-    /**
-     * 上传素材
-     *
-     * @param file      素材文件
-     * @param mediaType 媒体类型
-     * @return 上传后获取路径
-     */
-    String uploadMaterial(File file, MediaType mediaType);
 
     //----------------  临时素材    --------------------
 

@@ -7,7 +7,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 import psn.lotus.wechat.api.CardAPI;
 import psn.lotus.wechat.api.MaterialAPI;
-import psn.lotus.wechat.param.MediaType;
+import psn.lotus.wechat.param.MaterialType;
 import psn.lotus.wechat.param.meterial.NewsMaterialRequest;
 import psn.lotus.wechat.param.meterial.QueryMaterialsRequest;
 import psn.lotus.wechat.param.meterial.TempMaterialRequest;
@@ -32,7 +32,7 @@ public class MaterialTest extends AbstractTestNGSpringContextTests {
     @Test(enabled = false)
     public void testTemp() {
         TempMaterialRequest tmpMaterial = new TempMaterialRequest();
-        tmpMaterial.setType(MediaType.IMAGE);
+        tmpMaterial.setType(MaterialType.IMAGE);
         tmpMaterial.setFile(new File("D:\\tt.jpg"));
         JSONObject image = materialAPI.addTempMaterial(tmpMaterial);
         System.out.println(image);
@@ -78,8 +78,7 @@ public class MaterialTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testUploadImg() {
         File file = new File("D:\\tt.jpg");
-        String url = materialAPI.uploadMaterial(file, MediaType.IMAGE);
-        System.out.println(url);
+
     }
 
     @Test

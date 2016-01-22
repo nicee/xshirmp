@@ -70,21 +70,28 @@ public interface Urls {
     String GET_PERMANENT_MATERIAL_URL = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=ACCESS_TOKEN";
 
     /**
-     * 上传图文消息中的图片
-     */
-    String UPLOAD_MPNEW_IMG_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
-
-    /**
-     * 上传图文信息素材
-     */
-    String UPLOAD_MPNEW_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
-
-    /**
      * 下载素材
      */
     String DOWNLOAD_MATERIAL_URL = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
 
     //-------------------------------------- 群发管理 url --------------------------------------
+
+    /**
+     * 上传图片素材
+     */
+    String UPLOAD_IMG_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
+
+    /**
+     * 上传视频素材
+     */
+    //TODO check url cause of difference.
+    //open ids -> https://api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token=ACCESS_TOKEN
+    String UPLOAD_VIDEO_URL = "https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token=ACCESS_TOKEN";
+
+    /**
+     * 上传图文素材
+     */
+    String UPLOAD_MPNEW_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
 
     /**
      * 分组群发消息（文本，图文，图片，音频等）
@@ -94,6 +101,13 @@ public interface Urls {
     /**
      * 根据open id列表群发消息（文本，图文，图片，音频等）
      */
-    String SEND_MESSAE_BY_OPNE_IDS = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
+    String SEND_MESSAE_BY_OPEN_IDS = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
+
+    //-------------------------------------- 用户管理 url --------------------------------------
+
+    /**
+     * 用户组信息URL
+     */
+    String USER_GROUP_URL = "https://api.weixin.qq.com/cgi-bin/groups/get?access_token=ACCESS_TOKEN";
 
 }

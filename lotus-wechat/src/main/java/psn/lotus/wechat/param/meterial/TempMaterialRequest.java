@@ -1,6 +1,6 @@
 package psn.lotus.wechat.param.meterial;
 
-import psn.lotus.wechat.param.MediaType;
+import psn.lotus.wechat.param.MaterialType;
 
 import java.io.File;
 import java.io.Serializable;
@@ -15,15 +15,15 @@ public class TempMaterialRequest implements Serializable {
 
     private static final long serialVersionUID = -4390728333344203379L;
 
-    private MediaType type;
+    private MaterialType type;
 
     private File file;
 
-    public MediaType getType() {
+    public MaterialType getType() {
         return type;
     }
 
-    public void setType(MediaType type) {
+    public void setType(MaterialType type) {
         this.type = type;
     }
 

@@ -7,7 +7,6 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.ContentType;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.Args;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +71,7 @@ public final class ResponseHttpHandler implements ResponseHandler<JSONObject> {
             throw new UnsupportedEncodingException(e.getMessage());
         }
         if (charset == null) {
-            charset = HTTP.DEF_CONTENT_CHARSET;
+            charset = Charset.defaultCharset();
         }
         return charset;
     }

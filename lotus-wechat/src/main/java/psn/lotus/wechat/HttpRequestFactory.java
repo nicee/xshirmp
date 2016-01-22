@@ -9,9 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -87,7 +85,9 @@ public final class HttpRequestFactory implements HttpRequest {
         HttpPost post = new HttpPost(uri);
         post.addHeader("Content-Type", "application/json");
         post.addHeader("charset", "UTF-8");
-        post.setEntity(new StringEntity(content, Charset.defaultCharset()));
+        if (content != null) {
+            post.setEntity(new StringEntity(content, Charset.defaultCharset()));
+        }
         return execute(post, context, handler);
     }
 
