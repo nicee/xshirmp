@@ -1,4 +1,4 @@
-package psn.lotus.wechat;
+package psn.lotus;
 
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;

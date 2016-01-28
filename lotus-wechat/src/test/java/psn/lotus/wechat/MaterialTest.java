@@ -11,6 +11,7 @@ import psn.lotus.wechat.param.MaterialType;
 import psn.lotus.wechat.param.meterial.NewsMaterialRequest;
 import psn.lotus.wechat.param.meterial.QueryMaterialsRequest;
 import psn.lotus.wechat.param.meterial.TempMaterialRequest;
+import psn.lotus.wechat.param.template.PMaterialType;
 
 import java.io.File;
 
@@ -34,7 +35,7 @@ public class MaterialTest extends AbstractTestNGSpringContextTests {
         TempMaterialRequest tmpMaterial = new TempMaterialRequest();
         tmpMaterial.setType(MaterialType.IMAGE);
         tmpMaterial.setFile(new File("D:\\tt.jpg"));
-        JSONObject image = materialAPI.addTempMaterial(tmpMaterial);
+        JSONObject image = materialAPI.uploadTempMaterial(tmpMaterial);
         System.out.println(image);
     }
 
@@ -60,11 +61,14 @@ public class MaterialTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testGet() {
         QueryMaterialsRequest request = new QueryMaterialsRequest();
-        request.setType("video");
+        request.setType(PMaterialType.news);
         request.setCount(20);
         request.setOffset(0);
 
-        JSONObject result = materialAPI.getSimpleMaterials(request);
+        //image media_id => nvuPuFybp7PemE1mpvNnzJmsVAWs0-g5aCeXrm_ygdc
+        //news media_id => vrflnsZATR7Z9Tr29VHgXEflky3m-HzemR3uZprxFH8
+
+        JSONObject result = materialAPI.getMaterialsTypeSorted(request);
         System.out.println(result);
     }
 
@@ -78,13 +82,20 @@ public class MaterialTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testUploadImg() {
         File file = new File("D:\\tt.jpg");
-
+        String url = materialAPI.uploadImage(file);
+        System.out.println(url);
     }
 
     @Test
     public void testDownload() {
         String mediaId = "vrflnsZATR7Z9Tr29VHgXEflky3m-HzemR3uZprxFH8";
-        JSONObject result = materialAPI.getTempMaterial(mediaId);
+        JSONObject result = materialAPI.downloadTempMaterial(mediaId);
+    }
+
+    @Test
+    public void testCount() {
+        JSONObject result = materialAPI.materialCountDetail();
+        System.out.println(result);
     }
 
 }

@@ -23,7 +23,6 @@ public class AspectJAnnotation<A extends Annotation> {
         annotationMap.put(Aspect.class, AspectJAnnotationType.ASPECT_J_ANNOTATION_TYPE);
         annotationMap.put(Before.class, AspectJAnnotationType.BEFORE_J_ANNOTATION_TYPE);
         annotationMap.put(Pointcut.class, AspectJAnnotationType.POINTCUT_J_ANNOTATION_TYPE);
-
     }
 
     private enum AspectJAnnotationType {

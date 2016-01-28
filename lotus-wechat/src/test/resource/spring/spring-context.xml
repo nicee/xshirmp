@@ -14,6 +14,6 @@
         </property>
     </bean>
 
-    <context:component-scan base-package="psn.lotus.wechat"/>
+    <context:component-scan base-package="psn.lotus"/>
 
 </beans>

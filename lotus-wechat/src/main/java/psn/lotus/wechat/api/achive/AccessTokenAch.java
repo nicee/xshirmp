@@ -5,7 +5,7 @@ import org.apache.http.client.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import psn.lotus.wechat.HttpRequest;
+import psn.lotus.HttpRequest;
 import psn.lotus.wechat.Urls;
 import psn.lotus.wechat.api.AccessTokenAPI;
 

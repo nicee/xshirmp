@@ -31,6 +31,7 @@
         <module>lotus-wechat</module>
         <module>lotus-server</module>
         <module>lotus-dubbo</module>
+        <module>lotus-cp</module>
     </modules>
 
     <!-- 定义一些全局属性 -->

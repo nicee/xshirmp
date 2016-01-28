@@ -1,6 +1,7 @@
 package psn.lotus.wechat.param.meterial;
 
 import com.alibaba.fastjson.JSONObject;
+import psn.lotus.wechat.param.template.PMaterialType;
 
 import javax.validation.constraints.Max;
 import java.io.Serializable;
@@ -15,18 +16,18 @@ public class QueryMaterialsRequest implements Serializable {
 
     private static final long serialVersionUID = 3029462015923727192L;
 
-    private String type;
+    private PMaterialType type;
 
     private Integer offset;
 
     @Max(value = 20)
     private Integer count;
 
-    public String getType() {
+    public PMaterialType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PMaterialType type) {
         this.type = type;
     }
 

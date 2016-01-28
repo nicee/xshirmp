@@ -17,12 +17,25 @@
 
     <dependencies>
 
-        <!-- aspectj -->
+        <!-- lotus core -->
         <dependency>
+            <groupId>psn.lotus</groupId>
+            <artifactId>lotus-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- aspectjrt -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+        <!--<dependency>
             <groupId>aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>1.5.3</version>
-        </dependency>
+        </dependency>-->
+
 
         <!-- cglib -->
         <dependency>

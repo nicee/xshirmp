@@ -1,4 +1,4 @@
-package psn.lotus.wechat;
+package psn.lotus;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;

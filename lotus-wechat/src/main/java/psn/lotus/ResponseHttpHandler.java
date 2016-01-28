@@ -1,4 +1,4 @@
-package psn.lotus.wechat;
+package psn.lotus;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -11,6 +11,7 @@ import org.apache.http.util.Args;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import psn.lotus.wechat.WechatException;
 import psn.lotus.wechat.error.WechatError;
 
 import java.io.*;
