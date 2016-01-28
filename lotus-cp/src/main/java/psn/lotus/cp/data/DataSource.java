@@ -30,7 +30,7 @@ public class DataSource {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
-                datas.add(line.split("\t")[1]);
+                datas.add(line.split(" ")[1]);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

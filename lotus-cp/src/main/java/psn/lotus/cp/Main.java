@@ -12,19 +12,19 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
-        File file = new File("F:\\number");
+        String tmp = System.getProperty("user.dir");
+        File file = new File(tmp + "\\lotus-cp\\src\\main\\resource\\txt");
         File[] files = file.listFiles();
         if (files == null || files.length == 0) {
             throw new IllegalArgumentException("The path of '" + file.getName() + "' hasn't any files inside.");
         }
 
-        DataSource source = new DataSource(files[9]);
-        Pay pay = new Pay(source.getDatas());
-        pay.payOne();
-
-        /*for (File child : files) {
-            System.out.println();
-        }*/
+        for(File child : files) {
+            System.out.println(child.getName());
+            DataSource source = new DataSource(child);
+            Pay pay = new Pay(source.getDatas());
+            pay.pay();
+        }
     }
 
 }
