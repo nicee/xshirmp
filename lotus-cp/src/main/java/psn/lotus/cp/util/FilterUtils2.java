@@ -20,24 +20,52 @@ public class FilterUtils2 {
     public static List<String> filterNumber(String num) {
         List<String> result = new ArrayList<String>(all);
 
-        //ten
-        //85-90%
-        removeHead(result, getBothNum(num));
-        //85-90%
-//        removeHead(result, getHeadNum(num));
-        //86-90%
-        removeHead(result, getHeadNum2(num));
-        //87-91%
-        removeHead(result, getHeadNum3(num));
+        //90% 73.92%
+//        removeHead(result, getBothNum2(num));
+        //91% 74.73%
+//        removeTail(result, getBothNum2(num));
 
-        //unit
-        //85-92%
-//        removeTail(result, getTailNum(num));
-        //85-90%
+        //89% 74.06%
+//        removeHead(result, getBothNum(num));
+        //90% 74.88%
+//        removeTail(result, getBothNum(num));
+
+        //90% 74.11%
+//        removeHead(result, getHeadNum(num));
+        //90% 74.82%
+//        removeTail(result, getHeadNum(num));
+
+        //90% 73.92%
+//        removeHead(result, getHeadNum2(num));
+        //91% 74.78%
+//        removeTail(result, getHeadNum2(num));
+
+
+        //90% 74.12%
+//        removeHead(result, getHeadNum3(num));
+        //91% 74.97%
+//        removeTail(result, getHeadNum3(num));
+
+        //89% 75.26%
+//        removeHead(result, getTailNum(num));
+        //91% 75.97%
+        removeTail(result, getTailNum(num));
+
+        //90% 73.78%
+//        removeHead(result, getTailNum2(num));
+        //90% 74.56%
 //        removeTail(result, getTailNum2(num));
-        //93-95%
+
+        //--> 82.31%
+        //94%
+        removeHead(result, calSum(num).toString());
+        //95%
         removeTail(result, calSum(num).toString());
-        //86-92%
+
+
+        //89% 73.4%
+//        removeHead(result, getOppositeNum(num));
+        //91% 74.5%
 //        removeTail(result, getOppositeNum(num));
 
         return result;
@@ -113,6 +141,15 @@ public class FilterUtils2 {
         int s = Integer.parseInt(num.substring(3, 4));
         int g = Integer.parseInt(num.substring(4, 5));
         return "" + (q + b + s + g) % 10;
+    }
+
+    //小公
+    private static String getBothNum2(String num) {
+        if (num.length() != 5) {
+            throw new IllegalArgumentException("Number length must be 5.");
+        }
+        int ii = (int) (Integer.parseInt(num) * 0.618);
+        return "" + ii / 10000;
     }
 
     //3,4求和

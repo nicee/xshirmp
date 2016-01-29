@@ -66,20 +66,20 @@ public class ExceptionDefinition {
     private void internalLoad() throws IOException {
         if (!CollectionUtils.isEmpty(resourcePattern)) {
             for (String path : resourcePattern) {
-                internalLoadResoruce(resourcePatternResolver.getResources(path));
+                internalLoadResource(resourcePatternResolver.getResources(path));
             }
         }
     }
 
-    private void internalLoadResoruce(Resource[] resources) throws IOException {
+    private void internalLoadResource(Resource[] resources) throws IOException {
         if (ArrayUtils.isNotEmpty(resources)) {
             for (Resource resource : resources) {
-                internalLoadErrorMessage(resource.getInputStream());
+                internalLoadErrorResource(resource.getInputStream());
             }
         }
     }
 
-    private void internalLoadErrorMessage(InputStream inputStream) throws IOException {
+    private void internalLoadErrorResource(InputStream inputStream) throws IOException {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             exceptionProperties.load(inputStreamReader);

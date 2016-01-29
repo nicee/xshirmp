@@ -42,8 +42,8 @@ public class BulkTest extends AbstractTestNGSpringContextTests {
         param.setTouser("oVLeQt6uVnF97gWKgxM3nmPo4HPs");
 
         //测试文本
-        /*param.setContent("预览测试消息");
-        param.setMsgtype(BulkMessageType.text);*/
+        param.setContent("预览测试消息<a href='http://www.baidu.com'>这是一个测试链接</a>");
+        param.setMsgtype(BulkMessageType.text);
 
         //测试卡券下发
         /*param.setMsgtype(BulkMessageType.wxcard);
@@ -56,8 +56,8 @@ public class BulkTest extends AbstractTestNGSpringContextTests {
         param.setCardExt(cardExt);*/
 
         //测试图文
-        param.setMsgtype(BulkMessageType.mpnews);
-        param.setMedia_id("vrflnsZATR7Z9Tr29VHgXEflky3m-HzemR3uZprxFH8");
+//        param.setMsgtype(BulkMessageType.mpnews);
+//        param.setMedia_id("vrflnsZATR7Z9Tr29VHgXEflky3m-HzemR3uZprxFH8");
 
         //测试图片
         /*param.setMsgtype(BulkMessageType.image);

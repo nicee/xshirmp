@@ -146,4 +146,11 @@ public interface Urls {
      */
     String USER_GROUP_URL = "https://api.weixin.qq.com/cgi-bin/groups/get?access_token=ACCESS_TOKEN";
 
+    //-------------------------------------- 客服管理 url --------------------------------------
+
+    /**
+     * 发送客服消息
+     */
+    String SEND_CUSTOMER_MESSAGE_URL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
+
 }

@@ -33,15 +33,12 @@ public class Pay {
             String one = datas.get(i);
             String two = datas.get(i - 1);
             List<String> result = FilterUtils2.filterNumber(one);
-            //95%
+            //93%
             FilterUtils2.filterSummary(result, one);
 
-            if(result.size() > 75) {
-                tooMuchCount++;
-            }
-            if(tooMuchCount > 30) {
+            if(result.size() > 69) {
                 System.out.println("此方案有问题，不能使用");
-                return;
+                tooMuchCount++;
             }
 
             String target = two.substring(3, 5);

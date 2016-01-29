@@ -12,8 +12,9 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
-        String tmp = System.getProperty("user.dir");
+        /*String tmp = System.getProperty("user.dir");
         File file = new File(tmp + "\\lotus-cp\\src\\main\\resource\\txt");
+
         File[] files = file.listFiles();
         if (files == null || files.length == 0) {
             throw new IllegalArgumentException("The path of '" + file.getName() + "' hasn't any files inside.");
@@ -24,7 +25,12 @@ public class Main {
             DataSource source = new DataSource(child);
             Pay pay = new Pay(source.getDatas());
             pay.pay();
-        }
+        }*/
+
+        File all = new File("F:\\nn.txt");
+        DataSource source = new DataSource(all);
+        Pay pay = new Pay(source.getDatas());
+        pay.pay();
     }
 
 }
