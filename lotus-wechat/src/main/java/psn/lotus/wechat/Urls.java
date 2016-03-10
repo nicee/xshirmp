@@ -153,4 +153,9 @@ public interface Urls {
      */
     String SEND_CUSTOMER_MESSAGE_URL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
 
+    /**
+     * 获取所有客服接口
+     */
+    String GET_KF_LIST = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN";
+
 }

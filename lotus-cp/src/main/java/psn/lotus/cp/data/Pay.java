@@ -1,5 +1,6 @@
 package psn.lotus.cp.data;
 
+import psn.lotus.cp.util.FilterUtils;
 import psn.lotus.cp.util.FilterUtils2;
 
 import java.math.BigDecimal;
@@ -32,12 +33,16 @@ public class Pay {
         for (int len = datas.size(), i = len - 1; i > 0; i--) {
             String one = datas.get(i);
             String two = datas.get(i - 1);
+
+
             List<String> result = FilterUtils2.filterNumber(one);
             //93%
-            FilterUtils2.filterSummary(result, one);
+//            FilterUtils2.filterSummary(result, one);
 
-            if(result.size() > 69) {
-                System.out.println("此方案有问题，不能使用");
+            FilterUtils2.filterOld(result, one);
+
+            if(result.size() > 72) {
+//                System.out.println("此方案有问题，不能使用");
                 tooMuchCount++;
             }
 
@@ -56,6 +61,7 @@ public class Pay {
                 win -= pay;
                 lastFail = true;
                 failCount++;
+//                print(result, one, target);
 //                System.out.println("Result: pay Fail...");
             }
 //            System.out.println("Account left is: " + win);

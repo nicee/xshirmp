@@ -41,7 +41,7 @@ public final class AccessTokenAch implements AccessTokenAPI {
 
     public String replaceAccessToken(String srcUrl) {
         return srcUrl.replace(TOKEN_PLACEHOLDER, getAccessToken());
-//        return srcUrl.replace(TOKEN_PLACEHOLDER, "ngrQaWW4ZXb2wwBQG26zrAQKUzYWUSU53Ant_o8VM6AEdwz_ws47jWO5Zm_XXCtPbTdirbt2Wehy3FFAsAkYDo5eiS2FIszJxn-aRF5WkW8KNDcACAPSI");
+//        return srcUrl.replace(TOKEN_PLACEHOLDER, "GtAkbFCceu7yd_oFlFSBtpoH-Xfnh-92fKtOBhhC_MwOrFUF4Qbd-NQ-PWF0bU3jBB8U9E8XeMDJjXKptDahegTAdH2w7FhlBUi_p5D0-Jmckpb-1exLuUBvEVj4TcsZZEAgAHADIE");
     }
 
     private boolean validateCached() {

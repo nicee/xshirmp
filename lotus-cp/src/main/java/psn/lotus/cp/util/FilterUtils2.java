@@ -20,6 +20,12 @@ public class FilterUtils2 {
     public static List<String> filterNumber(String num) {
         List<String> result = new ArrayList<String>(all);
 
+        //cha 88.23% he 84.87%
+//        removeHead(result, calSpan(num));
+
+        //cha 91.59% he 89.07%
+//        removeTail(result, calSpan(num));
+
         //90% 73.92%
 //        removeHead(result, getBothNum2(num));
         //91% 74.73%
@@ -49,7 +55,7 @@ public class FilterUtils2 {
         //89% 75.26%
 //        removeHead(result, getTailNum(num));
         //91% 75.97%
-        removeTail(result, getTailNum(num));
+//        removeTail(result, getTailNum(num));
 
         //90% 73.78%
 //        removeHead(result, getTailNum2(num));
@@ -58,9 +64,9 @@ public class FilterUtils2 {
 
         //--> 82.31%
         //94%
-        removeHead(result, calSum(num).toString());
+//        removeHead(result, calSum(num).toString());
         //95%
-        removeTail(result, calSum(num).toString());
+//        removeTail(result, calSum(num).toString());
 
 
         //89% 73.4%
@@ -85,20 +91,27 @@ public class FilterUtils2 {
         }
     }
 
+    public static void filterOld(List<String> src, String num) {
+        String ten = num.substring(3, 4);
+        String ge = num.substring(4, 5);
+        removeBoth(src, ten);
+        removeBoth(src, ge);
+    }
+
     //过滤跨,
-    @Deprecated
+    /*@Deprecated
     public static void filterSpan(List<String> src, String num) {
         List<String> tmp = new ArrayList<String>(src);
-        Integer span = calSpan(num);
+        String span = calSpan(num);
         for (String str : tmp) {
             Integer t = Integer.parseInt(str.substring(0, 1));
             Integer g = Integer.parseInt(str.substring(1, 2));
-            int tSpan = Math.abs(t - g);
-            if (Math.abs(tSpan - span) >= 5) {
+            int tSpan = Math.abs(t + g);
+            if (Math.abs(tSpan - span) == 0) {
                 src.remove(str);
             }
         }
-    }
+    }*/
 
     //同时派出
     @Deprecated
@@ -217,13 +230,14 @@ public class FilterUtils2 {
 
 
     //求跨
-    private static Integer calSpan(String num) {
+    private static String calSpan(String num) {
         if (num.length() != 5) {
             throw new IllegalArgumentException("Number length must be 5.");
         }
-        int s = Integer.parseInt(num.substring(3, 4));
-        int g = Integer.parseInt(num.substring(4, 5));
-        return Math.abs(s - g);
+        int s = Integer.parseInt(num.substring(1, 2));
+        int g = Integer.parseInt(num.substring(2, 3));
+        return String.valueOf((s + g)% 10);
+//        return String.valueOf(Math.abs(s - g));
     }
 
 }

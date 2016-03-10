@@ -17,4 +17,9 @@ public interface CustomerAPI {
      */
     void sendMessage(CustomerMsgRequest params);
 
+    /**
+     * 获取所有客服
+     */
+    void getAllWaiter();
+
 }

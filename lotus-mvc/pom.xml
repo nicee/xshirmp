@@ -17,6 +17,13 @@
 
     <dependencies>
 
+        <!-- lotus core -->
+        <dependency>
+            <groupId>psn.lotus</groupId>
+            <artifactId>lotus-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- OSCache -->
         <dependency>
             <groupId>opensymphony</groupId>
