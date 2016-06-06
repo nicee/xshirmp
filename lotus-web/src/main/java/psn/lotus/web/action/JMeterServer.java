@@ -30,12 +30,17 @@ public class JMeterServer {
         Thread thread = Thread.currentThread();
         logger.info("[" + count + "] 线程'" + thread.getName() + "'正在访问接口'/jmeter/api1',请求时间为'" + new Date() + "'");
 
-        String[] headers =  WebHttpUtils.getHeaderNames(request);
-        for(String header : headers) {
+        String[] headers = WebHttpUtils.getHeaderNames(request);
+        for (String header : headers) {
             System.out.print(header + "  ");
         }
         System.out.println();
         System.out.println(WebHttpUtils.getRemoteIp(request));
+        return new ModelAndView("hello");
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public ModelAndView test(HttpServletRequest request) {
         return new ModelAndView("hello");
     }
 

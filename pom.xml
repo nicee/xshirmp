@@ -35,12 +35,13 @@
         <module>lotus-cp</module>
         <module>lotus-web</module>
         <module>lotus-web-debug</module>
+        <module>lotus-thirdapi</module>
     </modules>
 
     <!-- 定义一些全局属性 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springframework.version>4.2.3.RELEASE</springframework.version>
+        <springframework.version>4.2.5.RELEASE</springframework.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 

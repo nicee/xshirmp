@@ -41,7 +41,15 @@ public class CPData {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while((line = reader.readLine()) != null) {
-                numbers.add(line.split("\t")[1]);
+                String[] strs = line.split("\t");
+                //期号
+                Integer qiHao = Integer.parseInt(strs[0].split("-")[1]);
+                //96-120 最大连错9
+                //0-23 最大连错10
+                //24-95 最大连错12
+                if(qiHao > 23 && qiHao < 96) {
+                    numbers.add(strs[1]);
+                }
             }
         }catch (IOException e) {
             e.printStackTrace();

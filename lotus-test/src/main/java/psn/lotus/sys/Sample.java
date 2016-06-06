@@ -28,6 +28,9 @@ public class Sample {
 
     public static void main(String[] args) {
 
+        Calendar calendar = Calendar.getInstance();
+            int week = calendar.get(Calendar.DAY_OF_WEEK);
+
         String d = UUID.randomUUID().toString();
 
         Vector<String> v = new Vector<String>();

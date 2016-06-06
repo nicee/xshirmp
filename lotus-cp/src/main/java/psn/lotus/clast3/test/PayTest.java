@@ -21,6 +21,8 @@ public class PayTest {
 
     public void test() {
         List<String> numbers = data.getNumbers();
+        int maxFail = 0, curFail = 0;
+        boolean fail = false;
         int wined = 0, lost = 0, notbuy = 0;
         for (int len = numbers.size(), i = len - 1; i > 0; i--) {
             //当前号码
@@ -44,13 +46,19 @@ public class PayTest {
             boolean win = checkPay(buy, last2);
             int cost = 64 * 2;
             if (win) {
-                account += (194 - cost);
+                account += (194 - cost) * curFail;
                 wined++;
+                if (curFail > maxFail) {
+                    maxFail = curFail;
+                }
+                curFail = 0;
             } else {
-                account -= cost;
+                curFail++;
+                account -= (cost * curFail);
                 lost++;
             }
         }
+        System.out.println("最大连错: " + maxFail);
         System.out.println("测试总数据期数为: " + numbers.size());
         System.out.print("账户金额为: " + account + ", 中奖: " + wined + ", 未中奖: " + lost + ", 未买期数: " + notbuy);
     }

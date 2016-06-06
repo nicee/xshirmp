@@ -11,7 +11,7 @@
            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
        default-lazy-init="false">
 
-    <context:component-scan base-package="psn.lotus.action"/>
+    <context:component-scan base-package="psn.lotus.web.action"/>
 
     <mvc:annotation-driven/>
 

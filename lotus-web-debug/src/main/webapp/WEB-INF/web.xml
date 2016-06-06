@@ -16,9 +16,18 @@
         <param-value>nicee</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>javax.servlet.context.tempdir</param-name>
+        <param-value>D:\tmp\web_tmp.txt</param-value>
+    </context-param>
+
     <listener>
         <listener-class>psn.lotus.web.listener.ContextListenerTest</listener-class>
     </listener>
+    <!--<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>-->
+
 
     <!--Spring MVC Servlet-->
     <servlet>

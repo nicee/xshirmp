@@ -16,8 +16,10 @@
     <!-- 定义一些全局属性 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springframework.version>4.2.3.RELEASE</springframework.version>
+        <springframework.version>4.2.5.RELEASE</springframework.version>
         <slf4j.version>1.7.5</slf4j.version>
+        <jackson.version>2.7.3</jackson.version>
+        <hibernate.validation.version>5.2.4.Final</hibernate.validation.version>
     </properties>
 
     <dependencies>
@@ -53,6 +55,30 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validation.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -78,7 +104,7 @@
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <!--jetty启动端口号 -->
-                            <port>8066</port>
+                            <port>8065</port>
                         </connector>
                     </connectors>
                 </configuration>
