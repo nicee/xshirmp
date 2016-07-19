@@ -41,10 +41,10 @@ public class Pay {
 
             FilterUtils2.filterOld(result, one);
 
-            if(result.size() > 72) {
-//                System.out.println("此方案有问题，不能使用");
+            /*if(result.size() > 72) {
+                System.out.println("此方案有问题，不能使用");
                 tooMuchCount++;
-            }
+            }*/
 
             String target = two.substring(3, 5);
 //            print(result, one, target);

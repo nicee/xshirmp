@@ -4,6 +4,7 @@ import psn.lotus.cp.data.DataSource;
 import psn.lotus.cp.data.Pay;
 
 import java.io.File;
+import java.util.Random;
 
 /**
  * @author: nicee
@@ -30,10 +31,10 @@ public class Main {
 //        File target = files[files.length - 2];
 //        System.out.println(target.getName());
 
-        File target = new File("F:\\nn.txt");
+        /*File target = new File("F:\\nn.txt");
         DataSource source = new DataSource(target);
         Pay pay = new Pay(source.getDatas());
-        pay.pay();
+        pay.pay();*/
 
         /*File all = new File("F:\\nn.txt");
         DataSource source = new DataSource(all);

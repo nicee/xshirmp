@@ -74,12 +74,18 @@ public class PayTest {
             Integer code = CPUtils.getCode(numStr);
             if (codes.contains(code)) {
                 //对于有重复的对码, 直接返回null
-                codes.clear();
-                break;
+                /*codes.clear();
+                break;*/
+                continue;
             } else {
                 codes.add(code);
             }
         }
+
+        if (codes.size() == 1) {
+            codes.clear();
+        }
+
         return codes;
     }
 
