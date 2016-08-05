@@ -11,30 +11,39 @@ import java.io.Serializable;
  */
 public class Fragment implements Serializable {
 
-    private static final long serialVersionUID = 8285487350039849151L;
+    private static final long serialVersionUID = 3007915831379181190L;
 
-    private String serialNo;
+    private String serial;
 
-    private Long number;
+    private Integer serialNo;
+
+    private Integer number;
 
     private int tenNo;
 
     private int unitNo;
 
+    public String getSerial() {
+        return serial;
+    }
 
-    public String getSerialNo() {
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public Integer getSerialNo() {
         return serialNo;
     }
 
-    public void setSerialNo(String serialNo) {
+    public void setSerialNo(Integer serialNo) {
         this.serialNo = serialNo;
     }
 
-    public Long getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 

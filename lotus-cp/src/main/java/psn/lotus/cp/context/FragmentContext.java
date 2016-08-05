@@ -15,4 +15,6 @@ public interface FragmentContext {
 
     List<Fragment> getFragments();
 
+    List<Fragment> getFragments(Integer start, Integer end);
+
 }

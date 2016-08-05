@@ -16,10 +16,6 @@ import java.util.List;
 public class FragmentReader {
 
     public static List<Fragment> read(InputStream inputStream) throws IOException {
-        return read(inputStream, null);
-    }
-
-    public static List<Fragment> read(InputStream inputStream, Integer start) throws IOException {
         Reader reader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
 
@@ -27,15 +23,8 @@ public class FragmentReader {
         List<Fragment> fragments = new ArrayList<Fragment>();
         while ((line = bufferedReader.readLine()) != null) {
             String[] pieces = line.split("\t");
-            String serial = pieces[0];
-            if (start == null) {
-                Fragment fragment = create(pieces[0], pieces[1]);
-                fragments.add(fragment);
-            } else if (Integer.parseInt(serial) > start) {
-                Fragment fragment = create(pieces[0], pieces[1]);
-                fragments.add(fragment);
-                break;
-            }
+            Fragment fragment = create(pieces[0], pieces[1]);
+            fragments.add(fragment);
         }
 
         try {
@@ -51,8 +40,9 @@ public class FragmentReader {
 
     private static Fragment create(String serial, String number) {
         Fragment fragment = new Fragment();
-        fragment.setSerialNo(serial);
-        fragment.setNumber(Long.parseLong(number));
+        fragment.setSerial(serial);
+        fragment.setSerialNo(Integer.parseInt(serial.split("-")[1]));
+        fragment.setNumber(Integer.parseInt(number));
         int len = number.length();
         fragment.setTenNo(Integer.parseInt(number.substring(len - 2, len - 1)));
         fragment.setUnitNo(Integer.parseInt(number.substring(len - 1, len)));

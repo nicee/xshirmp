@@ -9,11 +9,11 @@ import java.io.*;
  * @project lotus
  * @time 2016/8/4 17:47
  */
-public class DefaultFragmentConfigure implements FragmentConfigure {
+public class FragmentConfigureImpl implements FragmentConfigure {
 
     private String configPath;
 
-    public DefaultFragmentConfigure(String configPath) {
+    public FragmentConfigureImpl(String configPath) {
         this.configPath = configPath;
     }
 

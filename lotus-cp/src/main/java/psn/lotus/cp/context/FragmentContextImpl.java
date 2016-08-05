@@ -7,6 +7,7 @@ import psn.lotus.cp.support.FragmentReader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -16,13 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * @project lotus
  * @time 2016/8/4 17:15
  */
-public class FragmentContextImpl implements Runnable, FragmentContext {
+public class FragmentContextImpl implements FragmentContext {
 
     private static Logger logger = LoggerFactory.getLogger(FragmentContextImpl.class);
 
     private boolean init;
-
-    private Integer start;
 
     private volatile List<Fragment> fragments;
 
@@ -38,7 +37,7 @@ public class FragmentContextImpl implements Runnable, FragmentContext {
         if (!init) {
             boolean locked = lock.tryLock();
             if (locked) {
-                this.run();
+                this.init();
                 lock.unlock();
             }
         }
@@ -48,20 +47,29 @@ public class FragmentContextImpl implements Runnable, FragmentContext {
         return this.fragments;
     }
 
-    public void setStart(Integer start) {
-        this.start = start;
+    public List<Fragment> getFragments(Integer start, Integer end) {
+        List<Fragment> fragments = getFragments();
+        List<Fragment> results = new ArrayList<Fragment>();
+
+        for (Fragment fragment : fragments) {
+            boolean add = (start == null || (start != null && fragment.getSerialNo() >= start));
+            add = add && ((end == null) || (end != null && fragment.getSerialNo() <= end));
+            if (add) {
+                results.add(fragment);
+            }
+        }
+
+        return results;
     }
 
-    public void run() {
-        if (!init) {
-            try {
-                InputStream input = configure.getInputStream();
-                this.fragments = FragmentReader.read(input, start);
-                this.init = true;
-            } catch (IOException e) {
-                logger.error("Load fragment configure failure....");
-                e.printStackTrace();
-            }
+    private void init() {
+        try {
+            InputStream input = configure.getInputStream();
+            this.fragments = FragmentReader.read(input);
+            this.init = true;
+        } catch (IOException e) {
+            logger.error("Load fragment configure failure....");
+            e.printStackTrace();
         }
     }
 
