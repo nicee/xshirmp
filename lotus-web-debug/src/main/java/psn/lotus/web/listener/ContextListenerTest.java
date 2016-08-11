@@ -1,7 +1,9 @@
 package psn.lotus.web.listener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -15,7 +17,8 @@ import java.util.Enumeration;
  */
 public class ContextListenerTest implements ServletContextListener {
 
-    static final Logger logger = LoggerFactory.getLogger(ContextListenerTest.class);
+    // static final Logger logger = LoggerFactory.getLogger(ContextListenerTest.class);
+    static final Logger logger = Logger.getLogger(ContextListenerTest.class);
 
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("进入了Root上下文初始化步骤.... event = " + sce.getServletContext().getServerInfo());
@@ -25,21 +28,26 @@ public class ContextListenerTest implements ServletContextListener {
             Enumeration<String> attrs = servletContext.getAttributeNames();
             while (attrs.hasMoreElements()) {
                 String attr = attrs.nextElement();
-                logger.info("key = {}, value = {}", attr, servletContext.getAttribute(attr));
+
+                // logger.info("key = {}, value = {}", attr, servletContext.getAttribute(attr));
+                logger.info("key = " + attr + ", value = " + servletContext.getAttribute(attr));
             }
 
             logger.info("---> 获取web.xml中context-param中指定的配置项属性");
             attrs = servletContext.getInitParameterNames();
             while (attrs.hasMoreElements()) {
                 String attr = attrs.nextElement();
-                logger.info("key = {}, value = {}", attr, servletContext.getInitParameter(attr));
+
+                // logger.info("key = {}, value = {}", attr, servletContext.getInitParameter(attr));
+                logger.info("key = " + attr + ", value = " + servletContext.getInitParameter(attr));
             }
         }
 
         logger.info("---> 获取Spring MVC ROOT上下文对象");
         String attr = WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE;
-        logger.info("key = {}, value = {}", attr, servletContext.getAttribute(attr));
 
+        // logger.info("key = {}, value = {}", attr, servletContext.getAttribute(attr));
+        logger.info("key = " + attr + ", value = " + servletContext.getAttribute(attr));
 
     }
 

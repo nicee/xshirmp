@@ -15,7 +15,7 @@ import psn.lotus.web.bean.User;
  * @time 2016/4/25 16:24
  */
 @Controller
-public class BeanValidationControlle {
+public class BeanValidationController {
 
     @ResponseBody
     @RequestMapping(value = "/bean")
