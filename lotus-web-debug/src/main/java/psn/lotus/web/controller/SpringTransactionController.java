@@ -2,9 +2,11 @@ package psn.lotus.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import psn.lotus.web.bean.User;
 import psn.lotus.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,5 +30,10 @@ public class SpringTransactionController {
         return userService.add("Test For Transaction", "don't care about it.");
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/param", method = RequestMethod.POST)
+    public String saveForJMeter(@RequestBody User user, HttpServletRequest request) {
+        return userService.add(user.getName(), user.getPassword());
+    }
 
 }
