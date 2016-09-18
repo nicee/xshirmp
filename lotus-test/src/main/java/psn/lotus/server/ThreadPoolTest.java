@@ -1,7 +1,5 @@
 package psn.lotus.server;
 
-import org.junit.Test;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,7 +12,7 @@ public class ThreadPoolTest {
 
     static volatile transient AtomicInteger count = new AtomicInteger(0);
 
-    @Test
+//    @Test
     public void test() {
         int cpuNums = Runtime.getRuntime().availableProcessors();
         System.out.println("当前服务器CPU个数为: " + cpuNums);

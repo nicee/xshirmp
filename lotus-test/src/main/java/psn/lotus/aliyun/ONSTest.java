@@ -4,7 +4,6 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import org.junit.Test;
 
 /**
  * @author xjl
@@ -13,7 +12,7 @@ import org.junit.Test;
  */
 public class ONSTest {
 
-    @Test
+//    @Test
     public void acs() {
         String regionId = "cn-hangzhou";
         String accessKey = "waLW9oWIkyE4Dvi2";

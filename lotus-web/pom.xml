@@ -15,6 +15,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <properties>
+        <jasig.version>4.2.5</jasig.version>
+        <jetty.ssl.version>7.0.0.pre5</jetty.ssl.version>
+    </properties>
+
     <dependencies>
 
         <!-- spring web -->
@@ -39,6 +44,20 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
+        </dependency>
+
+        <!-- jasig for cas server -->
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${jasig.version}</version>
+        </dependency>
+
+        <!-- jetty ssl -->
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-ssl</artifactId>
+            <version>${jetty.ssl.version}</version>
         </dependency>
 
     </dependencies>
@@ -67,6 +86,9 @@
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <!--jetty启动端口号 -->
                             <port>8066</port>
+                        </connector>
+                        <connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">
+                            <port>8443</port>
                         </connector>
                     </connectors>
                 </configuration>

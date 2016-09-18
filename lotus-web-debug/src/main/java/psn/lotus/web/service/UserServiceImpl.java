@@ -5,7 +5,6 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionalEventListener;
 import psn.lotus.web.bean.User;
 import psn.lotus.web.dao.UserDAO;
 import psn.lotus.web.support.CustomApplicationEvent;
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private ApplicationEventPublisher applicationEventPublisher;
 
     //M1.
-    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Transactional(readOnly = false, /*rollbackFor = {RuntimeException.class, Exception.class}*/ rollbackFor = IllegalArgumentException.class, noRollbackFor = NullPointerException.class)
     public String add(String name, String password) {
         User user = new User();
 
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
 //        String result = check(name) ? "新增失败, 已经存在’" + name + "‘用户." :
 //                ((userDAO.insert(user) == 1) ? "新增成功，创建一个'" + name + "‘用户." : "新增失败, 数据库操作异常");
         //显示调用异常创建
-        // createException();
+//        createException();
 
         //M2. 函数调用方式执行业务逻辑操作
         String result = doAdd(user);
@@ -50,8 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     //M2
-    // @Transactional(readOnly = false, rollbackFor = Exception.class)
-    @TransactionalEventListener()
+//     @Transactional(readOnly = false, rollbackFor = Exception.class)
+//    @TransactionalEventListener
     private String doAdd(User user) {
         String name = user.getName();
         String info = check(name) ? "新增失败, 已经存在’" + name + "‘用户." :
@@ -61,7 +60,7 @@ public class UserServiceImpl implements UserService {
         publishApplicationEvent(user);
 
         //显示调用异常创建
-//        createException();
+        createException();
 
         return info;
     }

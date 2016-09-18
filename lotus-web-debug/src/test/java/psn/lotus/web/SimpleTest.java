@@ -2,9 +2,10 @@ package psn.lotus.web;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-// import org.junit.Test;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+
+// import org.junit.Test;
 
 /**
  * @author xjl

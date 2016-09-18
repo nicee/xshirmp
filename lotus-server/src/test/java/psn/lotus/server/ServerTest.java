@@ -1,10 +1,8 @@
 package psn.lotus.server;
 
-import org.junit.Test;
 import psn.lotus.server.api.Connector;
 import psn.lotus.server.api.Handler;
 import psn.lotus.server.api.HandlerContainer;
-import psn.lotus.server.api.LifeCycleListener;
 import psn.lotus.server.handler.ConcurrentHandlerContainer;
 import psn.lotus.server.handler.HandlerWrapper;
 import psn.lotus.server.handler.SampleHandler;
@@ -15,7 +13,7 @@ import psn.lotus.server.handler.SampleHandler;
  */
 public class ServerTest {
 
-    @Test
+//    @Test
     public void test() throws Exception {
         HandlerContainer handlerContainer = new ConcurrentHandlerContainer();
         Handler handler = new HandlerWrapper(new SampleHandler());

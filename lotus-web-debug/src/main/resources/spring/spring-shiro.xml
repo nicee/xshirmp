@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans-4.2.xsd">
+
+    <!-- 用户会话持久化CURD的操作 -->
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/>
+
+    <!-- 在session集群中统一管理对象 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="sessionDAO"/>
+    </bean>
+
+    <!-- -->
+    <bean id="customAuthRealm" class="psn.lotus.web.support.shiro.CustomAuthRealm"/>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="customAuthRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/"/>
+        <property name="unauthorizedUrl" value="/login"/>
+        <!-- 此处用于配置shiro自定义拦截过程, entry的key如何auth/anon/ssl等 -->
+        <!--<property name="filters">
+            <map>
+                <entry key="" value=""/>
+            </map>
+        </property>-->
+        <property name="filterChainDefinitions">
+            <!-- 左侧为url映射地址, 右侧为拦截器对象 -->
+            <!-- 可选拦截器key为 auth|anon|logout|noSessionCreation|perms|port|rest|roles|ssl|user-->
+            <value>
+                <!-- TODO complete it...-->
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--开启Shiro的注解-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+</beans>

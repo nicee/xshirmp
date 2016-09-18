@@ -23,25 +23,24 @@
 
     <!-- 定义一些子模块 -->
     <modules>
-        <module>lotus-core</module>
-        <module>lotus-datasource</module>
-        <module>lotus-test</module>
         <module>lotus-aspectJ</module>
-        <module>lotus-mvc</module>
-        <module>lotus-move</module>
-        <module>lotus-wechat</module>
-        <module>lotus-server</module>
-        <module>lotus-dubbo</module>
+        <module>lotus-core</module>
         <module>lotus-cp</module>
-        <module>lotus-web</module>
-        <module>lotus-web-debug</module>
+        <module>lotus-datasource</module>
+        <module>lotus-move</module>
+        <module>lotus-mvc</module>
+        <module>lotus-rpc</module>
+        <module>lotus-server</module>
+        <module>lotus-test</module>
         <module>lotus-thirdapi</module>
+        <module>lotus-web-debug</module>
+        <module>lotus-web</module>
     </modules>
 
     <!-- 定义一些全局属性 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springframework.version>4.2.5.RELEASE</springframework.version>
+        <springframework.version>4.3.0.RELEASE</springframework.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 

@@ -8,7 +8,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.junit.Test;
 
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public class ShopTest {
 
-    @Test
+//    @Test
     public void test() throws Exception {
         HttpGet httpGet = new HttpGet("http://localhost:8095/shop/account/code");
 
@@ -32,7 +31,7 @@ public class ShopTest {
         }
     }
 
-    @Test
+//    @Test
     public void resetPWD() throws Exception {
         StringBuffer buffer = new StringBuffer();
 
@@ -52,13 +51,13 @@ public class ShopTest {
         dealResponse(httpPost);
     }
 
-    @Test
+//    @Test
     public void getInfo() throws Exception {
         HttpGet httpGet = new HttpGet("http://localhost:8095/shop/account/getLoginAccountInfo");
         dealResponse(httpGet);
     }
 
-    @Test
+//    @Test
     public void testAR() throws Exception {
         HttpPost httpPost = new HttpPost("https://61.130.0.179/view/checkVoiceService.cgi");
 
@@ -74,4 +73,5 @@ public class ShopTest {
         String content = handler.handleResponse(response);
         System.out.println(content);
     }
+
 }
