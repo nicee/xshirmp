@@ -5,7 +5,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import psn.lotus.web.bean.User;
 
@@ -19,13 +18,13 @@ public class BeanValidationController {
 
     @ResponseBody
     @RequestMapping(value = "/bean")
-    public void validate(@Validated User user, BindingResult bindingResult) {
+    public String validate(@Validated User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
                 System.out.println(error);
             }
         }
-        throw new NullPointerException("user is null...");
+        return "user is null...";
     }
 
 }

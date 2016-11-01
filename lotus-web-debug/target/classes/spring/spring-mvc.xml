@@ -11,8 +11,6 @@
            http://www.springframework.org/schema/mvc/spring-mvc.xsd"
        default-lazy-init="false">
 
-    <!--<mvc:annotation-driven/>-->
-
     <bean class="psn.lotus.web.resolver.CustomizedExceptionResolver"/>
 
     <mvc:annotation-driven validator="globalValidator"/>
@@ -21,12 +19,6 @@
 
     <bean id="globalValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
-    </bean>
-
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
     </bean>
 
     <bean id="handlerAdapter"
@@ -39,14 +31,58 @@
                     <property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
                 </bean>
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>application/json;charset=UTF-8</value>
-                        </list>
-                    </property>
+                    <property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
                 </bean>
             </list>
         </property>
     </bean>
+
+    <!-- velocity view resolver -->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="suffix" value=".vm"/>
+    </bean>-->
+
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:props/freemarker.properties"/>
+    </bean>
+
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+        <property name="templateLoaderPath" value="/WEB-INF/"/>
+        <property name="freemarkerVariables">
+            <map>
+                <!-- 设置一些常用全局变量 -->
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
+        <constructor-arg>
+            <!-- freemarker view resolver -->
+            <bean id="innerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+                <property name="contentType" value="text/html;charset=utf-8"/>
+                <property name="cache" value="true"/>
+                <property name="prefix" value=""/>
+                <property name="suffix" value=".ftl"/>
+                <property name="exposeRequestAttributes" value="false"/>
+                <property name="exposeSessionAttributes" value="true"/>
+                <property name="exposeSpringMacroHelpers" value="true"/>
+                <property name="requestContextAttribute" value="request"/>
+                <property name="order" value="0"/>
+            </bean>
+        </constructor-arg>
+        <property name="normalPrefix" value="pc/"/>
+        <property name="mobilePrefix" value="mobile/"/>
+        <property name="tabletPrefix" value="tablet/"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor"/>
+    </mvc:interceptors>
 
 </beans>

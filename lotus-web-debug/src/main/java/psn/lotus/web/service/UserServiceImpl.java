@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import psn.lotus.web.bean.User;
 import psn.lotus.web.dao.UserDAO;
-import psn.lotus.web.support.CustomApplicationEvent;
+import psn.lotus.web.support.event.CustomApplicationEvent;
 
 /**
  * @author xjl

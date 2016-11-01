@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans-4.2.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 存在多个Realm时, 仅返回第一个验证通过的身份 -->
+    <bean id="firstSuccessfulStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy"/>
+
+    <!-- 设置认证策略 -->
+    <bean id="modelAuthenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <property name="authenticationStrategy" ref="firstSuccessfulStrategy"/>
+    </bean>
+
+    <!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
     <!-- 用户会话持久化CURD的操作 -->
-    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/>
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+
+    <!-- 用户会话中的cookie读取策略, shiro框架默认采用此类 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- 此处如果没有赋值 将引起Cookie为Null的空指针 -->
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="secure" value="true"/>
+        <!-- 与当前网站的domain保持一致 -->
+        <property name="domain" value="${session.domain}"/>
+    </bean>
+
+    <!-- 用户会话中的cookie读取策略, shiro框架默认采用此类 -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- 此处如果没有赋值 将引起Cookie为Null的空指针 -->
+        <constructor-arg value="rememberMe"/>
+        <property name="httpOnly" value="true"/>
+        <property name="secure" value="true"/>
+        <!-- 与当前网站的domain保持一致 -->
+        <property name="domain" value="${session.domain}"/>
+        <property name="maxAge" value="${remember_me.max_age}"/>
+    </bean>
+
+    <!-- remember me管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('cmVtZW1iZXJfbWVfeHNoaXJtcA==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
 
     <!-- 在session集群中统一管理对象 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="${session.global.timeout}"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
-    <!-- -->
+    <!-- 自定义验证过程 -->
     <bean id="customAuthRealm" class="psn.lotus.web.support.shiro.CustomAuthRealm"/>
 
+    <!-- 默认的Web权限安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="authenticator" ref="modelAuthenticator"/>
         <property name="realm" ref="customAuthRealm"/>
         <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -32,8 +80,10 @@
         </property>-->
         <property name="filterChainDefinitions">
             <!-- 左侧为url映射地址, 右侧为拦截器对象 -->
-            <!-- 可选拦截器key为 auth|anon|logout|noSessionCreation|perms|port|rest|roles|ssl|user-->
+            <!-- 可选拦截器key为 authc|anon|logout|noSessionCreation|perms|port|rest|roles|ssl|user-->
             <value>
+                /callable = anon
+                /** = anon
                 <!-- TODO complete it...-->
             </value>
         </property>

@@ -1,5 +1,7 @@
 package psn.lotus.sys;
 
+import org.junit.Test;
+
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Consumer;
@@ -10,7 +12,7 @@ import java.util.function.Consumer;
  */
 public class Sample {
 
-    //    @Test
+    @Test
     public void test(String name) {
         String a = new String("大家");
         //a = a.toUpperCase();
@@ -29,7 +31,7 @@ public class Sample {
     public static void main(String[] args) {
 
         Calendar calendar = Calendar.getInstance();
-            int week = calendar.get(Calendar.DAY_OF_WEEK);
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
 
         String d = UUID.randomUUID().toString();
 

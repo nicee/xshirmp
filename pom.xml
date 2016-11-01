@@ -32,9 +32,9 @@
         <module>lotus-rpc</module>
         <module>lotus-server</module>
         <module>lotus-test</module>
-        <module>lotus-thirdapi</module>
-        <module>lotus-web-debug</module>
         <module>lotus-web</module>
+        <module>lotus-web-debug</module>
+        <module>lotus-worm</module>
     </modules>
 
     <!-- 定义一些全局属性 -->

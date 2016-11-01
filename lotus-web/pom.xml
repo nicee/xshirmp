@@ -51,6 +51,16 @@
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-core</artifactId>
             <version>${jasig.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context-support</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- jetty ssl -->
