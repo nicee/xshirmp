@@ -28,6 +28,12 @@ public class Sample {
         }
     }
 
+    @Test
+    public void random() throws Exception {
+
+        SecureRandom secureRandom = SecureRandom.getInstance("");
+    }
+
     public static void main(String[] args) {
 
         Calendar calendar = Calendar.getInstance();
@@ -73,6 +79,13 @@ public class Sample {
         for (Integer c : hm.keySet()) {
             System.out.println("HashMap get(" + c + ") -> " + hm.get(c));
         }
+
+        List<String> list = new ArrayList<String>();
+
+        if(!list.isEmpty()) {
+            System.out.println("list is not empty.");
+        }
+
     }
 
 }
