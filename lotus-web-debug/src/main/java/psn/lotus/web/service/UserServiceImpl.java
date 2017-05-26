@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private ApplicationEventPublisher applicationEventPublisher;
 
     //M1.
-    @Transactional(readOnly = false, /*rollbackFor = {RuntimeException.class, Exception.class}*/ rollbackFor = IllegalArgumentException.class, noRollbackFor = NullPointerException.class)
+    @Transactional(readOnly = false, rollbackFor = {RuntimeException.class, Exception.class})
     public String add(String name, String password) {
         User user = new User();
 
@@ -43,15 +43,21 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public User find(String name) {
+        return userDAO.find(name);
+    }
+
     // 用于判断当前用户是否已经存在, true 存在
     private boolean check(String name) {
         return userDAO.find(name) != null;
     }
 
     //M2
-//     @Transactional(readOnly = false, rollbackFor = Exception.class)
+
 //    @TransactionalEventListener
-    private String doAdd(User user) {
+//    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public String doAdd(User user) {
         String name = user.getName();
         String info = check(name) ? "新增失败, 已经存在’" + name + "‘用户." :
                 ((userDAO.insert(user) == 1) ? "新增成功，创建一个'" + name + "‘用户." : "新增失败, 数据库操作异常");

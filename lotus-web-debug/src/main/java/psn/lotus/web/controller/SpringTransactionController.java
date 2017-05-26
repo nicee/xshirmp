@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import psn.lotus.web.bean.User;
+import psn.lotus.web.service.SimpleBeanService;
 import psn.lotus.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,16 @@ import javax.servlet.http.HttpServletResponse;
 public class SpringTransactionController {
 
     @Autowired
+    private SimpleBeanService simpleBeanService;
+
+    @Autowired
     private UserService userService;
+
+    @ResponseBody
+    @RequestMapping(value = "/one", method = RequestMethod.GET)
+    public User findOne(String name) {
+        return userService.find(name);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/multi", method = RequestMethod.GET, produces = "application/json; charset=utf-8")

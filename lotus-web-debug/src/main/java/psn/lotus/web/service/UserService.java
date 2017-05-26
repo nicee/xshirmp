@@ -1,5 +1,7 @@
 package psn.lotus.web.service;
 
+import psn.lotus.web.bean.User;
+
 /**
  * @author xjl
  * @project lotus
@@ -8,5 +10,7 @@ package psn.lotus.web.service;
 public interface UserService {
 
     String add(String name, String password);
+
+    User find(String name);
 
 }

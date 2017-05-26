@@ -36,4 +36,10 @@ public class HomeController {
         return subject.isAuthenticated() ? "hello" : "fail";
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        model.addAttribute("data", "data something...");
+        return "index";
+    }
+
 }
