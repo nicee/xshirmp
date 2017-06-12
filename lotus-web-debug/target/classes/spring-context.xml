@@ -27,6 +27,27 @@
         <constructor-arg name="configSource" ref="configSource"/>
     </bean>
 
+    <bean id="chatDataListener" class="psn.lotus.web.support.socketio.ChatDataListener"/>
+    <bean id="socketIOServerBean" class="psn.lotus.web.support.socketio.SocketIOServerBean">
+        <property name="hostname" value=""/>
+        <property name="port" value="8088"/>
+        <property name="listeners">
+            <list>
+                <ref bean="chatDataListener"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.xkeshi.core.context.ApplicationContextHelper"/>
+    <bean id="sdkConfig" class="com.xkeshi.messageplatform.sdk.common.entities.SdkConfig">
+        <property name="clientId" value="1"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="123456a"/>
+        <property name="secret" value="45a94772b9704cfe91408d4a216d72d5"/>
+        <!--<property name="host" value="http://push.dev.cdao007.com"/>-->
+        <property name="host" value="http://push.test.cdao007.com"/>
+    </bean>
+
     <import resource="/spring/spring-datasource.xml"/>
     <import resource="/spring/spring-shiro.xml"/>
     <import resource="/spring/spring-jedis.xml"/>

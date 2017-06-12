@@ -14,9 +14,9 @@ public class ONSTest {
 
 //    @Test
     public void acs() {
-        String regionId = "cn-hangzhou";
-        String accessKey = "waLW9oWIkyE4Dvi2";
-        String secretKey = "LvFlpDQIDnMdMtMWyRW1fFTjH3vqZC";
+        String regionId = "";
+        String accessKey = "";
+        String secretKey = "";
         IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
         IAcsClient iAcsClient = new DefaultAcsClient(profile);
 

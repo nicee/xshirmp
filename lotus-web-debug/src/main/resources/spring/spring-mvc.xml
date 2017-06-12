@@ -13,12 +13,36 @@
 
     <bean class="psn.lotus.web.resolver.CustomizedExceptionResolver"/>
 
-    <mvc:annotation-driven validator="globalValidator"/>
+    <mvc:annotation-driven validator="globalValidator">
+        <mvc:message-converters register-defaults="true">
+            <ref bean="xMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <context:component-scan base-package="psn.lotus.web.controller"/>
 
     <bean id="globalValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+
+    <bean id="xMessageConverter" class="com.xkeshi.webkits.converters.XMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/json;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="features">
+            <list>
+                <value>QuoteFieldNames</value>
+                <value>WriteNullListAsEmpty</value>
+                <value>WriteNullStringAsEmpty</value>
+                <value>WriteNullNumberAsZero</value>
+                <value>WriteNullBooleanAsFalse</value>
+                <value>WriteDateUseDateFormat</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="handlerAdapter"
@@ -84,5 +108,8 @@
     <mvc:interceptors>
         <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor"/>
     </mvc:interceptors>
+
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/static" location="static"/>
 
 </beans>
