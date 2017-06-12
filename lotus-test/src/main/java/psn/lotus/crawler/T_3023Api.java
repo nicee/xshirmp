@@ -20,10 +20,10 @@ import java.nio.charset.Charset;
 public class T_3023Api {
 
     //3023 app key
-    static final String appKey = "bd0c6f2d97b436fb407d1c85aa0fb202";
+    static final String appKey = "";
 
     //接口服务地址
-    static final String API_SERVER_URL = "http://api.3023.com/barcode/barcode?barcode=BARCODE";
+    static final String API_SERVER_URL = "";
 
     @Test
     public void doIt() throws Exception {
@@ -46,7 +46,7 @@ public class T_3023Api {
 
         for (int i = 0; i < 80; i++) {
             code += i;
-            String url = "http://www.anccnet.com/comm/GTIN.aspx?GTIN=0".concat(String.valueOf(code));
+            String url = "".concat(String.valueOf(code));
 
             uri = new URI(url);
             httpGet.setURI(uri);
