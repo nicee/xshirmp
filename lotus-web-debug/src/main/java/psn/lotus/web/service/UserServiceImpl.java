@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         publishApplicationEvent(user);
 
         //显示调用异常创建
-        createException();
+//        createException();
 
         return info;
     }

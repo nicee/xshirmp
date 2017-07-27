@@ -261,12 +261,6 @@
             <version>${netty.socketio}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.xkeshi</groupId>
-            <artifactId>message-sdk</artifactId>
-            <version>1.1.8</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -292,13 +286,20 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.16.v20140903</version>
                 <configuration>
-                    <stopKey>foo</stopKey>
+                    <stopKey>bye</stopKey>
                     <stopPort>9997</stopPort>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
                     <contextXml>src/main/resources/jetty-deploy.xml</contextXml>
                     <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <!--jetty启动端口号 -->
+                        <connector implementation="org.eclipse.jetty.server.bio.SelectChannelConnector">
+                            <!--jetty http连接端口号 -->
                             <port>8065</port>
+                        </connector>
+                        <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
+                            <!-- jetty https连接端口号 -->
+                            <port>9443</port>
+                            <!-- 值为.keystore文件的密码 -->
+                            <password>This is ssl password.</password>
                         </connector>
                     </connectors>
                 </configuration>
