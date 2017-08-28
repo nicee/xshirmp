@@ -291,16 +291,18 @@
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                     <contextXml>src/main/resources/jetty-deploy.xml</contextXml>
                     <connectors>
-                        <connector implementation="org.eclipse.jetty.server.bio.SelectChannelConnector">
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <!--jetty http连接端口号 -->
                             <port>8065</port>
                         </connector>
+                        <!--
                         <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
-                            <!-- jetty https连接端口号 -->
+                            &lt;!&ndash; jetty https连接端口号 &ndash;&gt;
                             <port>9443</port>
-                            <!-- 值为.keystore文件的密码 -->
+                            &lt;!&ndash; 值为.keystore文件的密码 &ndash;&gt;
                             <password>This is ssl password.</password>
                         </connector>
+                        -->
                     </connectors>
                 </configuration>
             </plugin>

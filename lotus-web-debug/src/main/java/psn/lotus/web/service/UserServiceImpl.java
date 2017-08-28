@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User find(String name) {
+        check(name);
         return userDAO.find(name);
     }
 

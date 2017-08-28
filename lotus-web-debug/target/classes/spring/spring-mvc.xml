@@ -15,7 +15,7 @@
 
     <mvc:annotation-driven validator="globalValidator">
         <mvc:message-converters register-defaults="true">
-            <ref bean="xMessageConverter"/>
+            <ref bean="messageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
@@ -25,7 +25,7 @@
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
     </bean>
 
-    <bean id="xMessageConverter" class="com.xkeshi.webkits.converters.XMessageConverter">
+    <bean id="messageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
@@ -33,7 +33,7 @@
                 <value>text/plain;charset=UTF-8</value>
             </list>
         </property>
-        <property name="features">
+        <!--<property name="features">
             <list>
                 <value>QuoteFieldNames</value>
                 <value>WriteNullListAsEmpty</value>
@@ -42,7 +42,7 @@
                 <value>WriteNullBooleanAsFalse</value>
                 <value>WriteDateUseDateFormat</value>
             </list>
-        </property>
+        </property>-->
     </bean>
 
     <bean id="handlerAdapter"
