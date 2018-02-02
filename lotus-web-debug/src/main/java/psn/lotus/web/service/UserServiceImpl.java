@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private ApplicationEventPublisher applicationEventPublisher;
 
     //M1.
+    @Override
     @Transactional(readOnly = false, rollbackFor = {RuntimeException.class, Exception.class})
     public String add(String name, String password) {
         User user = new User();
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
         //M1. 在此方法内部进行业务逻辑操作
 //        String result = check(name) ? "新增失败, 已经存在’" + name + "‘用户." :
 //                ((userDAO.insert(user) == 1) ? "新增成功，创建一个'" + name + "‘用户." : "新增失败, 数据库操作异常");
+
         //显示调用异常创建
 //        createException();
 
@@ -67,7 +69,7 @@ public class UserServiceImpl implements UserService {
         publishApplicationEvent(user);
 
         //显示调用异常创建
-//        createException();
+        createException();
 
         return info;
     }

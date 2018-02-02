@@ -40,6 +40,8 @@
         <javax.websocket.api>1.1</javax.websocket.api>
         <io.socket.client>0.8.3</io.socket.client>
         <netty.socketio>1.7.12</netty.socketio>
+        <gson.version>2.2.2</gson.version>
+        <fastjson.version>1.2.32</fastjson.version>
     </properties>
 
     <dependencies>
@@ -49,6 +51,12 @@
             <groupId>psn.xshirmp</groupId>
             <artifactId>xshirmp-webkits</artifactId>
             <version>${xshirmp.webkits.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>fastjson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- javax servlet -->
@@ -259,6 +267,18 @@
             <groupId>com.corundumstudio.socketio</groupId>
             <artifactId>netty-socketio</artifactId>
             <version>${netty.socketio}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
 
     </dependencies>
