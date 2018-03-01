@@ -1,8 +1,8 @@
 package psn.lotus.sys;
 
-import jdk.internal.org.objectweb.asm.ClassWriter;
-import jdk.internal.org.objectweb.asm.Opcodes;
 import org.junit.Test;
+import org.springframework.asm.ClassWriter;
+import org.springframework.asm.Opcodes;
 
 /**
  * @project lotus

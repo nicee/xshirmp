@@ -11,6 +11,20 @@
         </layout>
     </appender>
 
+    <appender name="business" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/logs/lotus-web-debug/business.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxBackupIndex" value="30"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%t - [%d{yyyy-MM-dd HH:mm:ss}][%-5p]%F:%L - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="trace"/>
+            <param name="LevelMax" value="info"/>
+        </filter>
+    </appender>
+
     <logger name="psn.lotus.web.controller" additivity="false">
         <level value="debug"/>
         <appender-ref ref="console"/>
@@ -35,8 +49,9 @@
     <!-- 输出mybatis日志 配置完成 -->
 
     <root>
-        <priority value="debug"/>
+        <priority value="info"/>
         <appender-ref ref="console"/>
+        <appender-ref ref="business"/>
     </root>
 
 </log4j:configuration>

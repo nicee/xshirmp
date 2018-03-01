@@ -18,9 +18,6 @@ public class ForkJoinTest {
             i++;
         }
         System.out.println("Last value of i is: " + i);
-        while (true) {
-
-        }
     }
 
 }
