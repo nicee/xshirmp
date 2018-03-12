@@ -21,7 +21,34 @@
         <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
         <property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"/>
         <property name="testConnectionOnCheckout" value="${jdbc.testConnectionOnCheckout}"/>
+        <property name="numHelperThreads" value="${jdbc.numHelperThreads}"/>
+        <property name="maxStatementsPerConnection" value="${jdbc.maxStatementsPerConnection}"/>
     </bean>
+
+    <!-- C3P0高并发下会存在连接池不够的情况，改成druid试试看 -->
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="name" value="druid-jdbc"/>
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="filters" value="wall, stat, log4j"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="initialSize" value="${jdbc.initSize}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="true"/>
+    </bean>-->
 
     <!--  MyBatis 配置  -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
