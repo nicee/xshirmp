@@ -31,12 +31,14 @@
         <module>lotus-web-debug</module>
         <module>lotus-crawler</module>
         <module>lotus-web-debug-act</module>
+        <module>lotus-rmi</module>
+        <module>lotus-cloud</module>
     </modules>
 
     <!-- 定义一些全局属性 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springframework.version>4.3.8.RELEASE</springframework.version>
+        <springframework.version>4.3.14.RELEASE</springframework.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
