@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-# CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -71,7 +71,11 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'yulin_crawler.pipelines.YulinCrawlerPipeline': 300,
+   'yulin_crawler.pipelines.IndexPipeline': 90,
+   'yulin_crawler.pipelines.DeriveQuotePipeline': 95,
+   'yulin_crawler.pipelines.ListedCompanyPipeline': 100,
+   'yulin_crawler.pipelines.StockCompanyPipeline': 200,
+   'yulin_crawler.pipelines.DailyQuotePipeline': 300
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,3 +98,8 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+#Log options
+# LOG_LEVEL = 'INFO'
+# LOG_FORMAT = '%(levelname)s: %(message)s'
+# LOG_FILE = '../output.log'

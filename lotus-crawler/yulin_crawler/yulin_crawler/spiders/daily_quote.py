@@ -1,88 +1,40 @@
 # -*- coding: utf-8 -*-
-import json
-import re
-from datetime import date
 
-import scrapy
-from dateutil.relativedelta import relativedelta
-
-from ..items import CSMARItem
+from .base_spider import *
+from ..dbutil import get_record_stocks
+from ..items import daily_quote
 
 
-class CSMARStockPrider(scrapy.Spider):
-    name = 'csmar_stock_spider'
-    login_url = 'http://www.gtarsc.com/Login/index?ReturnUrl=%2fSingleTable%2fQueryData'
+class daily_quote_spider(csmar_base_spider):
+    # fields
+    name = 'daily_quote_spider'
+
+    sub_table_num = 20
+    table = 'stock_daily_quote'
+
+    space = relativedelta(years=1)
 
     def start_requests(self):
-        start_url = 'http://www.gtarsc.com/SingleTable/QueryData'
-        headers = {
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate',
-            'Accept-Language': 'zh-CN,zh;q=0.9',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Host': 'www.gtarsc.com',
-            'Origin': 'http://www.gtarsc.com',
-            'Pragma': 'no-cache',
-            'Referer': 'http://www.gtarsc.com/SingleTable/PreviewData',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                          '(KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-        cookies = {
-            '.ASPXAUTH': 'EB260CA9E6E7E6FE44BAD5BE93159FFE6FD0573D831F57A1D3E72FA2100F6E2B8D7B9591F36C242AADE4C283846707ABFAEFB1D50BF2C97C3FA99C30FFEA54902CFA59548A8E86FE0FED5E0059F3C4BC906B894A15303DB24C7DADE95B0485CCBC1B07E274567EEE0D15BF0AA900E745C2EE5237125A1867DBE44736F12ED614E8E83FAB40DA745DD9A8FB10CA3EB88A',
-            'ASP.NET_SessionId': 'odfogdubwxqpkuos5l2gsyw2',
-            'CNZZDATA1258304211': '60881034-1532858754-http%253A%252F%252Fwww.gtarsc.com%252F%7C1532921908',
-            'Hm_lpvt_65bdc5493f8363f6edac9ffa7019ca87': '1532924442',
-            'Hm_lvt_65bdc5493f8363f6edac9ffa7019ca87': '1532674524,1532689600,1532831189,1532924440',
-            'UM_distinctid': '164e5c7a78b32f-03e10de2df431a-47e1039-100200-164e5c7a78d44b'
-        }
-        start = date(2010, 9, 1)
-        now = date.today()
-        while start <= now:
-            form_data = self._get_next_form('002467', start)
-            yield scrapy.FormRequest(url=start_url, method='post', headers=headers, cookies=cookies,
-                                     formdata=form_data, callback=self.parse, dont_filter=True)
-            start += relativedelta(months=1)
-
-    def parse(self, response):
-        if response.url == self.login_url:
-            self.log(u'当前查询session已过期，请重新登录')
-            return None
-
-        json_data = json.loads(response.text)['Data']
-        if json_data:
-            item_keys = ['Stkcd', 'Trddt', 'Opnprc', 'Hiprc', 'Loprc', 'Clsprc', 'Dnshrtrd', 'Dnvaltrd', 'Dsmvosd',
-                         'Dsmvtll', 'Dretwd', 'Dretnd', 'Adjprcwd', 'Adjprcnd', 'Markettype', 'Capchgdt', 'Trdsta']
-            index = 0
-            len_items = len(json_data)
-            items = [{item['ColumnName']: item['CellValue']} for item in json_data]
-            while (index + 17) < len_items:
-                yield self._build_item(items[index: index + 17], item_keys)
-                index += 17
-        else:
-            self.log(u'当前查询无结果')
+        stock_tuple = get_record_stocks(self.table, self.sub_table_num)
+        for stock in stock_tuple:
+            # 遍历股票代码和上市日期，获取行情数据
+            for item in super().start_requests(stock[1], stock[0]):
+                yield item
+            pass
         pass
 
-    def _build_item(self, json_data, keys):
-        one_json = {}
-        for item in json_data:
-            one_json.update(item)
-        item = CSMARItem()
-        for key in keys:
-            item[key] = one_json[key] if key in one_json else 'null'
-        if item['Trdsta'] != 'null':
-            trdsta = re.findall(pattern='\d+', string=item['Trdsta'])
-            if trdsta:
-                item['Trdsta'] = trdsta[0]
+    def parse(self, response):
+        col_data, json_data = super().parse(response)
+        if json_data:
+            for item in super().build_items(json_data, col_data, daily_quote):
+                yield item
+            pass
+        pass
 
-        return item
-
-    def _get_next_form(self, stock_code, start):
-        start_str = start.strftime('%Y-%m-%d')
-        end_str = (start + relativedelta(months=1)).strftime('%Y-%m-%d')
-        query_set = json.dumps({
+    def build_query_set(self, start, stock_code):
+        start_str = str(start)
+        end_str = self.calc_end_date(start)
+        return {
             'Tables': [{
                 'TbId': '447',
                 'Fields': [{
@@ -224,9 +176,4 @@ class CSMARStockPrider(scrapy.Spider):
             'DBID': 63, 'CodeSelType': '1', 'MID': 9, 'CodeType': '1', 'DBTitle': '股票市场交易',
             'TreeNodeId': '4178', 'QueryString': '?nodeid=4176', 'SingleTableId': 447, 'FileFormat': '1',
             'Ishavetime': True
-        })
-        page_row_count = 50
-        return {
-            'querySet': query_set.encode('utf-8'),
-            'pageRowCount': str(page_row_count).encode('utf-8')
         }
